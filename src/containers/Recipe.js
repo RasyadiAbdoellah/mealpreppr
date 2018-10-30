@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import IngredientList from './IngredientList'
+
 
 export default class Recipe extends Component {
   constructor(props){
@@ -41,7 +43,10 @@ export default class Recipe extends Component {
     Requires data sent up to be an array.
     */
 
-    this.setState({Recipe:{Ingredients: data}})
+    const Recipe = this.state.Recipe
+    Recipe.Ingredients = data
+
+    this.setState({Recipe})
   }
 
 render() {
@@ -52,7 +57,7 @@ render() {
           Recipe Name:
           <input id="Recipe-name" value={this.state.Recipe.name} onChange={this.recipeInputHandler} />
         </label>
-
+        <IngredientList/>
         <label>
           Details:
           <textarea id="Recipe-details" value={this.state.Recipe.details} onChange={this.recipeInputHandler}/>

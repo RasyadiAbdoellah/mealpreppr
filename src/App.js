@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Recipe from './containers/Recipe'
+import {Recipe} from './containers'
 import logo from './logo.svg';
 import './App.css';
 
