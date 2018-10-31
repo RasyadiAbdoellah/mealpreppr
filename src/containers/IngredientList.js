@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
+import IngredientItem from '../components/IngredientItem'
 
 export default class IngredientList extends Component {
   constructor(props){
     super(props)
 
     this.state = {
-      Ingredients:['']
+      Ingredients:[{
+        name:'',
+        RecipeIngredients:{
+          val: '',
+          scale:'',
+        }
+      }]
     }
   }
 
@@ -13,7 +20,13 @@ export default class IngredientList extends Component {
     event.preventDefault()
     const ingredientArr = this.state.Ingredients
 
-    ingredientArr.push('')
+    ingredientArr.push({
+      name:'',
+      RecipeIngredients:{
+        val:'',
+        scale:'',
+      }
+    })
 
     this.setState({Ingredients: ingredientArr})
   }
@@ -26,18 +39,24 @@ export default class IngredientList extends Component {
   }
 
   ingredientInput = (event) => {
-    const target = event.target
-    const index = target.id.split('_')[1]
+    const index = event.target.id.split('_')[1]
+    const key = event.target.id.split('_')[2]
+    const val = event.target.value
     const ingredientArr = this.state.Ingredients
-    ingredientArr[index] = target.value
+
+    if(key === 'val' || key === 'scale'){
+      ingredientArr[index].RecipeIngredients[key] = val
+    } else {
+      ingredientArr[index][key] = val
+      
+    }
 
     this.setState({Ingredients:ingredientArr})
   }
 
   removeIngredient = (event) => {
     event.preventDefault()
-    const target = event.target
-    const index = target.id.split('_')[1]
+    const index = event.target.id.split('_')[1]
     const ingredientArr = this.state.Ingredients
 
     ingredientArr.splice(index, 1)
@@ -45,23 +64,29 @@ export default class IngredientList extends Component {
     this.setState({Ingredients: ingredientArr})
   }
   render () {
-    console.log(this.state.Ingredients[0])
-
+    
     const IngredientItems = this.state.Ingredients.map((ingredient, i, array) => {
-      console.log(`test`)
-      console.log(`index is ${i}, element is ${ingredient}, array is ${array}`)
-      if(typeof this.state.Ingredients[i] == 'undefined' || i === array.length-1 ){
+      console.log(this.state.Ingredients[i])
+      if(i === array.length-1 ){
         return (
-          <li id={`ingredient_${i}`}>
-              <input id={`ingredient_${i}_input`} value={ingredient} onKeyDown={this.keyCheck} onChange={this.ingredientInput}/>
-              <button onClick={this.addIngredient}> + </button>
-          </li>
+         <IngredientItem 
+         value={ingredient.name} 
+         keyCheck={this.keyCheck} 
+         ingredientInput={this.ingredientInput}
+         addIngredient={this.addIngredient}
+         removeIngredient={this.removeIngredient}
+         index={i}
+         ingredient={ingredient}
+         last
+         />
         )
       }else {
         return (
-           <li id={`ingredient_${i}`}>
-            <p> {ingredient} </p>
-            <button id={`ingredient_${i}_btn`} onClick={this.removeIngredient}> - </button>
+           <li key={i} id={`ingredient_${i}`}>
+            <input id={`ingredient_${i}_name`} value={ingredient.name} onKeyDown={this.keyCheck} onChange={this.ingredientInput}/>
+            <input id={`ingredient_${i}_val`} type="number" value={ingredient.RecipeIngredients.val} onKeyDown={this.keyCheck} onChange={this.ingredientInput}/>
+            <input id={`ingredient_${i}_scale`} value={ingredient.RecipeIngredients.scale} onKeyDown={this.keyCheck} onChange={this.ingredientInput}/>
+            <button id={`ingredient_${i}_removeBtn`} onClick={this.removeIngredient}> - </button>
           </li>
         )
       }
