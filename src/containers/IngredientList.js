@@ -66,30 +66,29 @@ export default class IngredientList extends Component {
   render () {
     
     const IngredientItems = this.state.Ingredients.map((ingredient, i, array) => {
-      console.log(this.state.Ingredients[i])
-      if(i === array.length-1 ){
-        return (
-         <IngredientItem 
-         value={ingredient.name} 
-         keyCheck={this.keyCheck} 
-         ingredientInput={this.ingredientInput}
-         addIngredient={this.addIngredient}
-         removeIngredient={this.removeIngredient}
-         index={i}
-         ingredient={ingredient}
-         last
-         />
-        )
-      }else {
-        return (
-           <li key={i} id={`ingredient_${i}`}>
-            <input id={`ingredient_${i}_name`} value={ingredient.name} onKeyDown={this.keyCheck} onChange={this.ingredientInput}/>
-            <input id={`ingredient_${i}_val`} type="number" value={ingredient.RecipeIngredients.val} onKeyDown={this.keyCheck} onChange={this.ingredientInput}/>
-            <input id={`ingredient_${i}_scale`} value={ingredient.RecipeIngredients.scale} onKeyDown={this.keyCheck} onChange={this.ingredientInput}/>
-            <button id={`ingredient_${i}_removeBtn`} onClick={this.removeIngredient}> - </button>
-          </li>
-        )
-      }
+      const returnValue = i === array.length-1 ? (
+        <IngredientItem 
+        value={ingredient.name} 
+        keyCheck={this.keyCheck} 
+        ingredientInput={this.ingredientInput}
+        addIngredient={this.addIngredient}
+        removeIngredient={this.removeIngredient}
+        index={i}
+        ingredient={ingredient}
+        last
+        />
+      ):(
+        <IngredientItem 
+      value={ingredient.name} 
+      keyCheck={this.keyCheck} 
+      ingredientInput={this.ingredientInput}
+      addIngredient={this.addIngredient}
+      removeIngredient={this.removeIngredient}
+      index={i}
+      ingredient={ingredient}
+      />
+      );
+      return returnValue
     })
 
 
