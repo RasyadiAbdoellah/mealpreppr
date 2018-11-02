@@ -13,7 +13,13 @@ export default class Recipe extends Component {
         day: 0,
         week: 0,
         month: 0,
-        Ingredients:[]
+        Ingredients:[{
+          name:'',
+          RecipeIngredients:{
+            val: '',
+            scale:'',
+          }
+        }]
       }
     }
   }
@@ -31,9 +37,6 @@ export default class Recipe extends Component {
     Recipe[objKey] = value
   
     this.setState({Recipe})
-
-    console.log({Recipe})
-  
   }
 
   ingredientHandler = (data) => {
@@ -44,6 +47,8 @@ export default class Recipe extends Component {
     */
 
     const Recipe = this.state.Recipe
+    Recipe.Ingredients = data
+
     Recipe.Ingredients = data
 
     this.setState({Recipe})
@@ -57,7 +62,7 @@ render() {
           Recipe Name:
           <input id="Recipe-name" value={this.state.Recipe.name} onChange={this.recipeInputHandler} />
         </label>
-        <IngredientList/>
+        <IngredientList onIngredientChange={this.ingredientHandler} Ingredients={this.state.Recipe.Ingredients}/>
         <label>
           Details:
           <textarea id="Recipe-details" value={this.state.Recipe.details} onChange={this.recipeInputHandler}/>

@@ -2,23 +2,17 @@ import React, {Component} from 'react';
 import IngredientItem from '../components/IngredientItem'
 
 export default class IngredientList extends Component {
-  constructor(props){
-    super(props)
-
-    this.state = {
-      Ingredients:[{
-        name:'',
-        RecipeIngredients:{
-          val: '',
-          scale:'',
-        }
-      }]
+  
+  //function to check for enter key stroke
+  keyCheck = (event) => {
+    if(event.keyCode === 13){
+      this.addIngredient(event)
     }
   }
 
   addIngredient = (event) => {
     event.preventDefault()
-    const ingredientArr = this.state.Ingredients
+    const ingredientArr = this.props.Ingredients
 
     ingredientArr.push({
       name:'',
@@ -27,22 +21,14 @@ export default class IngredientList extends Component {
         scale:'',
       }
     })
-
-    this.setState({Ingredients: ingredientArr})
-  }
-
-//function to check for enter key stroke
-  keyCheck = (event) => {
-    if(event.keyCode === 13){
-      this.addIngredient(event)
-    }
+    this.props.onIngredientChange(ingredientArr)
   }
 
   ingredientInput = (event) => {
     const index = event.target.id.split('_')[1]
     const key = event.target.id.split('_')[2]
     const val = event.target.value
-    const ingredientArr = this.state.Ingredients
+    const ingredientArr = this.props.Ingredients
 
     if(key === 'val' || key === 'scale'){
       ingredientArr[index].RecipeIngredients[key] = val
@@ -51,21 +37,21 @@ export default class IngredientList extends Component {
       
     }
 
-    this.setState({Ingredients:ingredientArr})
+    this.props.onIngredientChange(ingredientArr)
   }
 
   removeIngredient = (event) => {
     event.preventDefault()
     const index = event.target.id.split('_')[1]
-    const ingredientArr = this.state.Ingredients
+    const ingredientArr = this.props.Ingredients
 
     ingredientArr.splice(index, 1)
 
-    this.setState({Ingredients: ingredientArr})
+    this.props.onIngredientChange(ingredientArr)
   }
   render () {
     
-    const IngredientItems = this.state.Ingredients.map((ingredient, i, array) => {
+    const IngredientItems = this.props.Ingredients.map((ingredient, i, array) => {
       const returnValue = i === array.length-1 ? (
         <IngredientItem 
         value={ingredient.name} 
