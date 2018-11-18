@@ -3,15 +3,34 @@ import React from 'react';
 
 export default function IngredientList(props) {
 
-  const returnValue = props.last ? 
+  const button = props.last ? 
   (<button onClick={props.addIngredient}> + </button>): 
   (<button id={`ingredient_${props.index}_remove`} onClick={props.removeIngredient}> - </button>)
+
+  //local scope variables
+  const ingredient = props.ingredient
+  const quantity = ingredient.RecipeIngredients
+
   return (
     <li key={props.index} id={`ingredient_${props.index}`}>
-      <input id={`ingredient_${props.index}_name`} value={props.ingredient.name} onKeyDown={props.keyCheck} onChange={props.ingredientInput}/>
-      <input id={`ingredient_${props.index}_val`} type="number" value={props.ingredient.RecipeIngredients.val} onKeyDown={props.keyCheck} onChange={props.ingredientInput}/>
-      <input id={`ingredient_${props.index}_scale`} value={props.ingredient.RecipeIngredients.scale} onKeyDown={props.keyCheck} onChange={props.ingredientInput}/>  
-      {returnValue}
+
+      <input id={`ingredient_${props.index}_name`} 
+      value={ingredient.name} 
+      onKeyDown={props.keyCheck} 
+      onChange={props.ingredientInput}/>
+
+      <input id={`ingredient_${props.index}_val`} 
+      type="number" 
+      value={quantity.val} 
+      onKeyDown={props.keyCheck} 
+      onChange={props.ingredientInput}/>
+
+      <input id={`ingredient_${props.index}_scale`} 
+      value={quantity.scale} 
+      onKeyDown={props.keyCheck} 
+      onChange={props.ingredientInput}/>
+
+      {button}
     </li>
   )
 }
