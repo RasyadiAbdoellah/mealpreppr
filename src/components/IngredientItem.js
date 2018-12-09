@@ -1,15 +1,13 @@
 import React from 'react';
-  //IngredientItem will need the following props: addIngredient(eventHandler), removeIngredient(eventHandler), keyCheck(handler), ingredientInput(handler), i(index of array), ingredient(array element), last(boolean)
+// IngredientItem will need the following props:
+// addIngredient(eventHandler), removeIngredient(eventHandler),
+// keyCheck(handler), ingredientInput(handler),
+// i(index of array), ingredient(array element), last(boolean)
 
 export default function IngredientList(props) {
-
+  const { ingredient } = props
   const button = props.last ? 
-  (<button onClick={props.addIngredient}> + </button>): 
-  (<button id={`ingredient_${props.index}_remove`} onClick={props.removeIngredient}> - </button>)
-
-  //local scope variables
-  const ingredient = props.ingredient
-  const quantity = ingredient.RecipeIngredients
+    (<button onClick={props.addIngredient}> + </button>) : (<button id={`ingredient_${props.index}_remove`} onClick={props.removeIngredient}> - </button>)
 
   return (
     <li key={props.index} id={`ingredient_${props.index}`}>
@@ -21,12 +19,12 @@ export default function IngredientList(props) {
 
       <input id={`ingredient_${props.index}_val`} 
       type="number" 
-      value={quantity.val} 
+      value={ingredient.val} 
       onKeyDown={props.keyCheck} 
       onChange={props.ingredientInput}/>
 
       <input id={`ingredient_${props.index}_scale`} 
-      value={quantity.scale} 
+      value={ingredient.scale} 
       onKeyDown={props.keyCheck} 
       onChange={props.ingredientInput}/>
 

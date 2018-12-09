@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import IngredientList from './IngredientList'
+import IngredientList from './IngredientList';
 
 
 export default class Recipe extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.state = {
       Recipe: {
@@ -13,18 +13,16 @@ export default class Recipe extends Component {
         day: 0,
         week: 0,
         month: 0,
-        Ingredients:[{
-          name:'',
-          RecipeIngredients:{
-            val: '',
-            scale:'',
-          }
-        }]
-      }
-    }
+        Ingredients: [{
+          name: '',
+          val: '',
+          scale: '',
+        }],
+      },
+    };
   }
 
-  recipeInputHandler =  (event) => {
+  recipeInputHandler = (event) => {
     /*
     sets recipe state via inputs. Takes the input ID (Recipe-name or Recipe-details) and spilts it.
     Uses the split results and input value to determine state key:value pair.

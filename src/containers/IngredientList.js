@@ -16,10 +16,8 @@ export default class IngredientList extends Component {
 
     ingredientArr.push({
       name:'',
-      RecipeIngredients:{
-        val:'',
-        scale:'',
-      }
+      val:'',
+      scale:'',
     })
     this.props.onIngredientChange(ingredientArr)
   }
@@ -31,10 +29,12 @@ export default class IngredientList extends Component {
     const val = event.target.value
     const ingredientArr = this.props.Ingredients
 
+    ingredientArr[index][key] = val
+
     if(key === 'val' || key === 'scale'){
-      ingredientArr[index].RecipeIngredients[key] = val
-    } else {
       ingredientArr[index][key] = val
+    } else {
+      
       
     }
 
