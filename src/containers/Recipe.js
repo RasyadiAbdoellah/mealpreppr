@@ -33,7 +33,6 @@ export default class Recipe extends Component {
     const Recipe = this.state.Recipe
 
     Recipe[objKey] = value
-  
     this.setState({Recipe})
   }
 
@@ -46,10 +45,13 @@ export default class Recipe extends Component {
 
     const Recipe = this.state.Recipe
     Recipe.Ingredients = data
-
-    Recipe.Ingredients = data
-
     this.setState({Recipe})
+  }
+
+  submitHandler = () => {
+    // sends data to backend.
+    // will need to figure out how to connect to a dev and prod url, prob by setting ENV variables.
+    // We might be able to re-use this for post and patch. Put in a check to see if recipe has ID. no id = post, id = patch
   }
 
 render() {
@@ -65,7 +67,7 @@ render() {
           Details:
           <textarea id="Recipe-details" value={this.state.Recipe.details} onChange={this.recipeInputHandler}/>
         </label>
-
+        <input type="submit">Save</input>
       </form>
     </div>
   )
