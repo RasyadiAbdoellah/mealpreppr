@@ -67,7 +67,7 @@ render() {
           Details:
           <textarea id="Recipe-details" value={this.state.Recipe.details} onChange={this.recipeInputHandler}/>
         </label>
-        <input type="submit">Save</input>
+        <input type="submit" />
       </form>
     </div>
   )
