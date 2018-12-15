@@ -40,7 +40,27 @@ Backend repo: https://github.com/RasyadiAbdoellah/mealprep-api
 - As a user I want to share recipes with other users
 
 
-### ERD + Wireframes
+### Wireframes
+These wireframes are rough ideas of how the UI will look. I plan to update these with more detailed mockups as this project progresses.
+
+**Login View**
+![Login View](https://i.imgur.com/JxdSIFw.png)
+
+
+**Main view when a user logs in**
+![Main View](https://i.imgur.com/VnxCtoX.png)
+
+
+**Recipe list view**
+![Recipe List View](https://i.imgur.com/5ZI8khC.png)
+
+
+**Add Recipe view**
+![Add Recipe View](https://i.imgur.com/aLDDzgV.png)
+
+
+**Single Recipe view**
+![Single Recipe View](https://i.imgur.com/083fFLO.png)
 
 
 ### Dev log
