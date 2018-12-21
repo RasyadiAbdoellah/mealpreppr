@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import IngredientList from './IngredientList';
+import * as axios from 'axios';
 
 
 export default class Recipe extends Component {
@@ -33,6 +34,8 @@ export default class Recipe extends Component {
     const Recipe = this.state.Recipe
 
     Recipe[objKey] = value
+
+    //change below to action creator to modify for redux
     this.setState({Recipe})
   }
 
@@ -45,6 +48,8 @@ export default class Recipe extends Component {
 
     const Recipe = this.state.Recipe
     Recipe.Ingredients = data
+
+    //will need to experiment with redux actions to see if nested objects are possible
     this.setState({Recipe})
   }
 
@@ -52,6 +57,26 @@ export default class Recipe extends Component {
     // sends data to backend.
     // will need to figure out how to connect to a dev and prod url, prob by setting ENV variables.
     // We might be able to re-use this for post and patch. Put in a check to see if recipe has ID. no id = post, id = patch
+
+    // Will need to model how data is handled by redux. Should it have multiple objects to handle built vs persisted data?
+
+    //TODO: MODEL DATA AND CORRESPONDING LOGIC
+    switch(this.state.Recipe) {
+      case Recipe.id:
+        axios.patch()
+          .then()
+      // send an action to redux
+      break
+      case !Recipe.id:
+        axios.post()
+          .then()
+      // send an action to redux
+      break
+
+      default:
+    }
+    
+    
   }
 
 render() {
