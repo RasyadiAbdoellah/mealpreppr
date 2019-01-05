@@ -4,7 +4,7 @@ import React from 'react';
 // keyCheck(handler), ingredientInput(handler),
 // i(index of array), ingredient(array element), last(boolean)
 
-export default function IngredientList(props) {
+export default function IngredientItem(props) {
   const { ingredient } = props
   const button = props.last ? 
     (<button onClick={props.addIngredient}> + </button>) : (<button id={`ingredient_${props.index}_remove`} onClick={props.removeIngredient}> - </button>)
