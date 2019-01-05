@@ -81,14 +81,12 @@ TODO:
   *Improvements to consider*
   - Redux to handle state
   
-  ***Advantages***
-
+    - ***Advantages*** 
     - better seperation between data and component
     - stricter data handling = less risk
     - good practice
   
-  ***Disadvantages***
-
+    - ***Disadvantages***
     - More complex
     - more files
     - more work
@@ -96,14 +94,12 @@ TODO:
   
   - Vanilla CSS/SCSS or Framework?
 
-  ***With Vanilla***
-
+    - ***With Vanilla***
     - More control
     - Can mess around with newer CSS Grid and flexbox features
     - more work, but good practice
 
-  ***With Framework***
-
+    - ***With Framework***
     - Faster prototyping
     - less hassle
     - Mixing custom styles will be annoying
