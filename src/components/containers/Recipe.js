@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import IngredientList from './IngredientList';
 import * as axios from 'axios';
-import {default as API_URL} from '../config.js'
+import {default as API_URL} from '../../config.js'
 
 
 export default class Recipe extends Component {
   constructor(props) {
     super(props);
-
+    console.log(API_URL)
     this.state = {
       Recipe: {
         name: '',

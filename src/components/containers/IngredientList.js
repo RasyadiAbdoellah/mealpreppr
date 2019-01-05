@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import IngredientItem from '../components/IngredientItem'
+import IngredientItem from '../presentational/IngredientItem'
 
 export default class IngredientList extends Component {
   

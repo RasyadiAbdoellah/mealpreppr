@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {Recipe} from './containers'
-import logo from './logo.svg';
-import './App.css';
+import {Recipe} from './containers';
 
 class App extends Component {
   render() {
