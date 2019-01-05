@@ -6,7 +6,7 @@ export default class IngredientList extends Component {
   //function to check for enter key stroke
   keyCheck = (event) => {
     if(event.keyCode === 13){
-      this.addIngredient(event)
+      event.preventDefault()
     }
   }
 
@@ -16,24 +16,25 @@ export default class IngredientList extends Component {
 
     ingredientArr.push({
       name:'',
-      RecipeIngredients:{
-        val:'',
-        scale:'',
-      }
+      val:'',
+      scale:'',
     })
     this.props.onIngredientChange(ingredientArr)
   }
 
   ingredientInput = (event) => {
-    const index = event.target.id.split('_')[1]
-    const key = event.target.id.split('_')[2]
+    const eventID = event.target.id.split('_')
+    const index = eventID[1]
+    const key = eventID[2]
     const val = event.target.value
     const ingredientArr = this.props.Ingredients
 
+    ingredientArr[index][key] = val
+
     if(key === 'val' || key === 'scale'){
-      ingredientArr[index].RecipeIngredients[key] = val
-    } else {
       ingredientArr[index][key] = val
+    } else {
+      
       
     }
 

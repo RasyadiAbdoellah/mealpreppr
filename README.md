@@ -66,34 +66,41 @@ These wireframes are rough ideas of how the UI will look. I plan to update these
 ### Dev log
 
 5 Jan 2019
+
 The basic functionality is done. Recipe state object matches what the backend expects. Sending it to the backend should result in a 201 and provide the frontend with a Recipe ID and associated Ingredient objects with IDs. Now should the next step be basic styling or refactoring state to redux? With basic styling, should it be vanilla css/scss or use bootstrap or some other css framework?
+
+TODO:
+- rebuild recipe in redux
+- implement using redux-form
 
 
 ### Technical issues/improvements
 
 **5 Jan 2019:**
-*Improvements to consider*
-- Redux to handle state
+
+  *Improvements to consider*
+  - Redux to handle state
   
-  ***Advantages***
-  - better seperation between data and component
-  - stricter data handling = less risk
-  - good practice
+    - ***Advantages*** 
+    - better seperation between data and component
+    - stricter data handling = less risk
+    - good practice
   
-  ***Disadvantages***
-  - More complex
-  - more files
-  - more work
-- Styling
+    - ***Disadvantages***
+    - More complex
+    - more files
+    - more work
+    - Styling
+  
   - Vanilla CSS/SCSS or Framework?
 
-  ***With Vanilla***
-  - More control
-  - Can mess around with newer CSS Grid and flexbox features
-  - more work, but good practice
+    - ***With Vanilla***
+    - More control
+    - Can mess around with newer CSS Grid and flexbox features
+    - more work, but good practice
 
-  ***With Framework***
-  - Faster prototyping
-  - less hassle
-  - Mixing custom styles will be annoying
+    - ***With Framework***
+    - Faster prototyping
+    - less hassle
+    - Mixing custom styles will be annoying
 
