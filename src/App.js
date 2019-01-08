@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import {Recipe} from './components';
+import {Recipe, RecipeList} from './components';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Recipe/>
+        <RecipeList/>
       </div>
     );
   }
