@@ -73,6 +73,10 @@ TODO:
 - rebuild recipe in redux
 - implement using redux-form
 
+7 Jan 2019
+
+Got Redux running! Currently stores the retrieved data from the backend. Next steps is to better integrate Redux into components. Should also consider getting Redux Dev Tools on this.
+
 
 ### Technical issues/improvements
 
@@ -90,7 +94,6 @@ TODO:
     - More complex
     - more files
     - more work
-    - Styling
   
   - Vanilla CSS/SCSS or Framework?
 
@@ -104,3 +107,16 @@ TODO:
     - less hassle
     - Mixing custom styles will be annoying
 
+
+**7 Jan 2019:**
+
+Redux is successfully integrated into project. Improvements to consider:
+
+**Immediate**
+- Better integrate Redux with project needs, use redux-forms for handling input data and redux-promises or other redux middleware to improve http call -> action -> state change cycle
+- Build single recipe, single ingredient, and ingredient list components.
+
+**Further Planning Required**
+- Dashboard view
+- sorting by date
+- users
