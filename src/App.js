@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Recipe} from './containers';
+import {Recipe} from './components';
 
 class App extends Component {
   render() {
