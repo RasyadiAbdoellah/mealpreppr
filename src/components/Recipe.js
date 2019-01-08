@@ -7,7 +7,7 @@ import {default as API_URL} from '../config.js'
 export default class Recipe extends Component {
   constructor(props) {
     super(props);
-
+    console.log(API_URL)
     this.state = {
       Recipe: {
         name: '',
@@ -54,7 +54,7 @@ export default class Recipe extends Component {
     this.setState({Recipe})
   }
 
-  submitHandler = () => {
+  submitHandler = (event) => {
     // sends data to backend.
     // will need to figure out how to connect to a dev and prod url, prob by setting ENV variables.
     // We might be able to re-use this for post and patch. Put in a check to see if recipe has ID. no id = post, id = patch
@@ -62,28 +62,39 @@ export default class Recipe extends Component {
     // Will need to model how data is handled by redux. Should it have multiple objects to handle built vs persisted data?
 
     //TODO: MODEL DATA AND CORRESPONDING LOGIC
-    switch(this.state.Recipe) {
-      case Recipe.id:
-        axios.patch()
-          .then()
-      // send an action to redux
-      break
-      case !Recipe.id:
-        axios.post()
-          .then()
-      // send an action to redux
-      break
 
-      default:
-    }
-    
-    
+    console.log('submit clicked')
+    console.log(this.state)
+    const data = this.state
+    event.preventDefault()
+
+    if(data.Recipe.id){
+      console.log('patching...')
+      axios.patch(API_URL + '/recipes/' + this.state.Recipe.id , this.state)
+      .then(res =>{
+        console.log('response is:',res)
+        this.setState({Recipe: res.data})
+      })
+      .catch(error => {
+        console.log(error.response)
+      })
+    }else {
+      console.log('posting...')
+      axios.post(API_URL + '/recipes', this.state)
+        .then(res =>{
+          console.log('response is:',res)
+          this.setState({Recipe: res.data})
+        })
+        .catch(error => {
+          console.log(error.response)
+        })
+    }   
   }
 
 render() {
   return (
     <div>
-      <form>
+      <form onSubmit={this.submitHandler}>
         <label>
           Recipe Name:
           <input id="Recipe-name" value={this.state.Recipe.name} onChange={this.recipeInputHandler} />
@@ -93,7 +104,7 @@ render() {
           Details:
           <textarea id="Recipe-details" value={this.state.Recipe.details} onChange={this.recipeInputHandler}/>
         </label>
-        <input type="submit" />
+        <input type="submit" value="submit"/>
       </form>
     </div>
   )
