@@ -9,6 +9,7 @@ function RecipeList (props) {
     const get = () => {
         axios.get(API_URL + '/recipes')
             .then(res =>props.getAllRecipes(res))
+            .catch(error => console.log(error))
     }
 
     return (
