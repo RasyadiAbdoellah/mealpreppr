@@ -11,13 +11,8 @@ class RecipeList extends React.Component{
     //simple getter function that sends an api call to get all Recipes, then passes it to state.
     get = () => {
         axios.get(API_URL + '/recipes')
-            .then(res =>this.props.getAllRecipes(res))
+            .then(res =>props.getAllRecipes(res))
             .catch(error => console.log(error))
-    }
-
-    //getter func is called when the component will mount
-    componentWillMount() {
-        this.get()
     }
 
     render(){
