@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Field, FieldArray, reduxForm } from 'redux-form'
-import { addRecipe } from '../redux/actions/recipe'
+import { addRecipe, updateRecipe } from '../redux/actions/recipe'
 import { getRecipeById } from '../redux/selectors'
-
+import axios from 'axios';
+import API_URL from '../config';
 
 const IngredientItem = (ingredient, index, fields) => {
     // determine what button to display
@@ -34,6 +35,17 @@ const IngredientFieldArray = props => {
     )
 }
 
+
+//TODO change Recipe form to class component so submit has access to props
+const submit = (values) => {
+    if(!this.props.id){
+        return axios.post(API_URL+'/recipes', values).then(res => this.props.addRecipe(res.body))
+    } else {
+        const id =this.props.id
+        return axios.patch(API_URL+'/recipes/'+id, values).then(res => this.props.updateRecipe(res.body))
+    }
+}
+
 let RecipeForm = props => {
     const { handleSubmit } = props
     return (
@@ -55,6 +67,6 @@ RecipeForm = reduxForm({
     form: 'recipe'
 })(RecipeForm)
 
-RecipeForm = connect(mapStateToProps, { addRecipe })(RecipeForm)
+RecipeForm = connect(mapStateToProps, { addRecipe, updateRecipe })(RecipeForm)
 
 export default RecipeForm
