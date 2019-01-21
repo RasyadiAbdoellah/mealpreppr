@@ -7,12 +7,15 @@ import { getAllRecipes } from '../redux/actions/recipe'
 import { RecipeEntry } from '.';
 
 class RecipeList extends React.Component{
+
+    //simple getter function that sends an api call to get all Recipes, then passes it to state.
     get = () => {
         axios.get(API_URL + '/recipes')
             .then(res =>this.props.getAllRecipes(res))
             .catch(error => console.log(error))
     }
 
+    //getter func is called when the component will mount
     componentWillMount() {
         this.get()
     }
@@ -20,18 +23,18 @@ class RecipeList extends React.Component{
     render(){
         return (
             <ul>
-                {
-                    this.props.recipes.map(recipe => <RecipeEntry recipe={recipe}/>)
-                }
-                
+                {this.props.recipes.map(recipe => <RecipeEntry recipe={recipe}/>)} 
             </ul>
         )
     }
 }
 
+//the state mapped to props.recipes is actually formatted through selectors.js
+//getRecipesList returns an array of recipe objects
 function mapStateToProps(state) {
     const recipes = getRecipesList(state)
     return { recipes }
 }
 
+//exports the connected component
 export default connect(mapStateToProps, { getAllRecipes })(RecipeList)
