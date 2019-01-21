@@ -46,11 +46,9 @@ let RecipeForm = props => {
     )
 }
 
-function mapStateToProps(state, ownProps){
-    const { id } = ownProps
-    const recipe = getRecipeById(state, id)
-
-    return recipe
+// mapStateToProps function is only so that RecipeForm can be reused for editing recipes.
+function mapStateToProps(state, { id }){
+    return {initialValues: getRecipeById(state, id)}
 }
 
 RecipeForm = reduxForm({
