@@ -14,7 +14,7 @@ export function addRecipe(response) {
     }
 }
 
-export function udpateRecipe(response) {
+export function updateRecipe(response) {
     return {
         type: UPDATE_RECIPE,
         payload: response
