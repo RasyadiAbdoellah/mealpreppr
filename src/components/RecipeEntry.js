@@ -18,20 +18,24 @@ export default class RecipeEntry extends React.Component{
         let output
         if(!this.state.isEditing){
             output = (
-                <li key={recipe.id}>
-                <button onClick={this.toggleEdit}> Edit </button>
+                <React.Fragment>
+                    <button onClick={this.toggleEdit}> Edit </button>
                     <p>Name:{recipe.name}</p>
                     <p>ID: {recipe.id}</p>
-                </li>
+                </React.Fragment>
             )
         } else {
             output = (
-                <li>
+                <React.Fragment>
                     <button onClick={this.toggleEdit}> Edit </button>
                     <RecipeForm id={recipe.id} />
-                </li>
+                </React.Fragment>
             )
         }
-        return output
+        return (
+            <li key={recipe.id}>
+                {output}
+            </li>
+        )
     }
 }
