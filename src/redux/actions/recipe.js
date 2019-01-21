@@ -13,10 +13,3 @@ export function addRecipe(response) {
         payload: response
     }
 }
-
-export function updateRecipe(response) {
-    return {
-        type: UPDATE_RECIPE,
-        payload: response
-    }
-}

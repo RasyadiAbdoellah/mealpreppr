@@ -1,11 +1,16 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Field, FieldArray, reduxForm } from 'redux-form'
+import { addRecipe } from '../redux/actions/recipe'
+import { getRecipeById } from '../redux/selectors'
 
 
 const IngredientItem = (ingredient, index, fields) => {
-    let add = <button type='button' onClick={() => fields.push()}> + </button>
-    let remove
-    if (fields.length > 1) remove = (<button type='button' onClick={() => fields.remove(index)}> x </button>);
+    // determine what button to display
+    let add, remove
+    if (fields.length > 1 && index !== fields.length-1) remove = (<button type='button' onClick={() => fields.remove(index)}> - </button>); //if Ingredients array is more than 1, and current element is not last, show remove button
+    if (fields.length === 0 || index === fields.length-1) add = (<button type='button' onClick={() => fields.push()}> + </button>); //if Ingredient array is empty, or current element is last, show add button
+
     return (
         <li key={index}>
             <Field name={`${ingredient}.val`} component='input' type='number' />
@@ -29,7 +34,7 @@ const IngredientFieldArray = props => {
     )
 }
 
-const RecipeForm = props => {
+let RecipeForm = props => {
     const { handleSubmit } = props
     return (
         <form onSubmit={handleSubmit(data => console.log('submitting',data))}>
@@ -41,6 +46,17 @@ const RecipeForm = props => {
     )
 }
 
-export default reduxForm({
+function mapStateToProps(state, ownProps){
+    const { id } = ownProps
+    const recipe = getRecipeById(state, id)
+
+    return recipe
+}
+
+RecipeForm = reduxForm({
     form: 'recipe'
 })(RecipeForm)
+
+RecipeForm = connect(mapStateToProps, { addRecipe })(RecipeForm)
+
+export default RecipeForm
