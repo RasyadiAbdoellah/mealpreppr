@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Dashboard} from './components';
+import {RecipeForm, RecipeList} from './components';
 
 class App extends Component {
   constructor(props){
@@ -25,11 +25,14 @@ toggleRecipeForm = () => {
 
 render(){
     return (
-      <div className="App">
-        <Dashboard />
-      </div>
-    );
-  }
+        <div className="App">
+            <button onClick={this.toggleRecipeList}> Recipe List</button>
+            <button onClick ={this.toggleRecipeForm}> Add Recipe </button>
+            {this.state.displayRecipeForm && <RecipeForm/>}
+            {this.state.displayRecipeList && <RecipeList/>}
+        </div>
+    )
+}
 }
 
 export default App;
