@@ -38,9 +38,8 @@ export default function (state = initialState, action) {
         }
         case UPDATE_RECIPE: {
             const { data } = action.payload
-            const recipe = {...state.byId[data.id], data}
+            const recipe = {...state.byId[data.id], ...data}
             const recipesById = {...state.byId}
-
             recipesById[recipe.id] = {...recipe}
 
             return {

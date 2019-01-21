@@ -35,27 +35,31 @@ const IngredientFieldArray = props => {
     )
 }
 
+class RecipeFormClass extends React.Component {
+    submit = (values) => {
+        const {id, addRecipe, updateRecipe } = this.props
+        //data object is there because backend expects data.Recipe. I could change it into just an unamed pojo, seems like a lot of effort to reduce a line from the code tho.
+        const data = { Recipe: {...values}}
+        console.log('in submit',data)
 
-//TODO change Recipe form to class component so submit has access to props
-const submit = (values) => {
-    if(!this.props.id){
-        return axios.post(API_URL+'/recipes', values).then(res => this.props.addRecipe(res.body))
-    } else {
-        const id =this.props.id
-        return axios.patch(API_URL+'/recipes/'+id, values).then(res => this.props.updateRecipe(res.body))
+        if(!id){
+            return axios.post(API_URL + '/recipes', data).then(res => addRecipe(res))
+        } else {
+            return axios.patch(API_URL + '/recipes/' + id, data).then(res => updateRecipe(res))
+        }
     }
-}
 
-let RecipeForm = props => {
-    const { handleSubmit } = props
-    return (
-        <form onSubmit={handleSubmit(data => console.log('submitting',data))}>
-            <Field name='name' component='input' type='text' />
-            <Field name='details' component='textarea' />
-            <FieldArray name='Ingredients' component={IngredientFieldArray}/>
-            <button type="submit">Submit</button>
-        </form>
-    )
+    render(){
+        const { handleSubmit } = this.props
+        return (
+            <form onSubmit={handleSubmit(this.submit)}>
+                <Field name='name' component='input' type='text' />
+                <Field name='details' component='textarea' />
+                <FieldArray name='Ingredients' component={IngredientFieldArray}/>
+                <button type="submit">Submit</button>
+            </form>
+        )
+    }
 }
 
 // mapStateToProps function is only so that RecipeForm can be reused for editing recipes.
@@ -63,9 +67,9 @@ function mapStateToProps(state, { id }){
     return {initialValues: getRecipeById(state, id)}
 }
 
-RecipeForm = reduxForm({
+let RecipeForm = reduxForm({
     form: 'recipe'
-})(RecipeForm)
+})(RecipeFormClass)
 
 RecipeForm = connect(mapStateToProps, { addRecipe, updateRecipe })(RecipeForm)
 
