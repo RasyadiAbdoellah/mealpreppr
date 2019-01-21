@@ -6,3 +6,10 @@ export function getAllRecipes(response) {
         payload: response
     }
 }
+
+export function addRecipe(response) {
+    return {
+        type: ADD_RECIPE,
+        payload: response
+    }
+}

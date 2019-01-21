@@ -17,9 +17,23 @@ export default function (state = initialState, action) {
             });
             return {
                 ...state,
-                allIds: [ ...state.allIds, ...dataIds ],
-                byId: { ...state.byId, ...recipesById}
+                allIds: dataIds,
+                byId: recipesById
 
+            }
+        }
+        case ADD_RECIPE: {
+            const { data } = action.payload
+            const recipeIds = [...state.allIds]
+            const recipesById = {...state.byId}
+
+            recipeIds.push(data.id)
+            recipesById[data.id] = {...data}
+
+            return {
+                ...state,
+                allIds: recipeIds,
+                byId: recipesById
             }
         }
         default:
