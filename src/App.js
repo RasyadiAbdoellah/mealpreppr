@@ -26,7 +26,7 @@ toggleRecipeForm = () => {
 render(){
     return (
         <div className="App">
-            <button onClick={this.toggleRecipeList}> Recipe List</button>
+            <button onClick={this.toggleRecipeList}> My Recipe </button>
             <button onClick ={this.toggleRecipeForm}> Add Recipe </button>
             {this.state.displayRecipeForm && <RecipeForm/>}
             {this.state.displayRecipeList && <RecipeList/>}
