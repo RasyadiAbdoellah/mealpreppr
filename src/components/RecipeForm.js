@@ -51,9 +51,23 @@ class RecipeFormClass extends React.Component {
         console.log('in submit',data)
 
         if(!id){
-            return axios.post(API_URL + '/recipes', data).then(res => addRecipe(res))
+            return axios.post(API_URL + '/recipes', data)
+            .then(res => {
+                this.props.toggle()
+                return addRecipe(res)
+            })
+            .catch(error =>{
+                console.log(error)
+            })
         } else {
-            return axios.patch(API_URL + '/recipes/' + id, data).then(res => updateRecipe(res))
+            return axios.patch(API_URL + '/recipes/' + id, data)
+            .then(res => {
+                this.props.toggle()
+                updateRecipe(res)
+            })
+            .catch(error =>{
+                console.log(error)
+            })
         }
     }
 
