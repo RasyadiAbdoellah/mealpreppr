@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import {RecipeForm, RecipeList} from './components';
+import { connect } from 'react-redux';
+import {RecipeForm, RecipeList, RecipeExpanded} from './components';
+import { getStateRecipes ,getRecipeById } from './redux/selectors';
 
 class App extends Component {
   constructor(props){
@@ -24,15 +26,26 @@ toggleRecipeForm = () => {
 }
 
 render(){
+    const {selectedRecipe} = this.props 
     return (
         <div className="App">
             <button onClick={this.toggleRecipeList}> My Recipe </button>
             <button onClick ={this.toggleRecipeForm}> Add Recipe </button>
-            {this.state.displayRecipeForm && <RecipeForm/>}
+            {this.state.displayRecipeForm && <RecipeForm toggle={this.toggleRecipeForm}/>}
             {this.state.displayRecipeList && <RecipeList/>}
+            {selectedRecipe && <RecipeExpanded recipe={selectedRecipe}/>}
         </div>
     )
 }
+
+
+
 }
 
-export default App;
+function mapStateToProps(state){
+
+    const selectedRecipe = getRecipeById(state, getStateRecipes(state).selectedId)
+    return { selectedRecipe }
+}
+
+export default connect(mapStateToProps)(App);

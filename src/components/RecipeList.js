@@ -3,8 +3,19 @@ import { connect } from "react-redux";
 import { getRecipesList } from '../redux/selectors';
 import * as axios from 'axios';
 import API_URL from '../config';
-import { getAllRecipes } from '../redux/actions/recipe'
-import { RecipeEntry } from '.';
+import { getAllRecipes, selectRecipe } from '../redux/actions/recipe'
+import { RecipeItem } from '.';
+
+function RecipeCard(props) {
+    const { recipe, selectRecipe } = props
+    return (
+        <li key={recipe.id}>
+        <button onClick={()=>selectRecipe(recipe.id)}>More</button>
+            <p>Name:{recipe.name}</p>
+            <p>ID: {recipe.id}</p>
+        </li>
+    )
+}
 
 class RecipeList extends React.Component{
 
@@ -15,6 +26,10 @@ class RecipeList extends React.Component{
             .catch(error => console.log(error))
     }
 
+    selectRecipe = (id) => {
+        this.props.selectRecipe(id)
+    }
+
     //getter func is called when the component will mount
     componentWillMount() {
         this.get()
@@ -23,7 +38,7 @@ class RecipeList extends React.Component{
     render(){
         return (
             <ul>
-                {this.props.recipes.map(recipe => <RecipeEntry recipe={recipe}/>)} 
+                {this.props.recipes.map(recipe => <RecipeCard recipe={recipe} selectRecipe={this.selectRecipe}/>)} 
             </ul>
         )
     }
@@ -33,8 +48,8 @@ class RecipeList extends React.Component{
 //getRecipesList returns an array of recipe objects
 function mapStateToProps(state) {
     const recipes = getRecipesList(state)
-    return { recipes }
+    return { recipes } 
 }
 
 //exports the connected component
-export default connect(mapStateToProps, { getAllRecipes })(RecipeList)
+export default connect(mapStateToProps, { getAllRecipes, selectRecipe })(RecipeList)

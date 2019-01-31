@@ -1,8 +1,9 @@
-import { ADD_RECIPE, UPDATE_RECIPE, DELETE_RECIPE, GET_RECIPE, GET_RECIPES } from '../recipeActionTypes'
+import { ADD_RECIPE, UPDATE_RECIPE, DELETE_RECIPE, GET_RECIPE, GET_RECIPES, SELECT_RECIPE, CLEAR_RECIPE } from '../recipeActionTypes'
 
 const initialState = {
     allIds: [],
-    byId: {}
+    byId: {},
+    selectedId: null,
 }
 
 export default function (state = initialState, action) {
@@ -45,6 +46,22 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 byId: recipesById
+            }
+        }
+        case SELECT_RECIPE: {
+            
+            const  id  = action.payload
+            
+            return {
+                ...state,
+                selectedId: id,
+            }
+        }
+
+        case CLEAR_RECIPE: {
+            return {
+                ...state,
+                selectedId: null,
             }
         }
         default:
