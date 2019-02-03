@@ -1,6 +1,8 @@
-import { ADD_RECIPE, UPDATE_RECIPE, DELETE_RECIPE, GET_RECIPE, GET_RECIPES, SELECT_RECIPE, CLEAR_RECIPE } from '../recipeActionTypes'
+import { ADD_RECIPE, UPDATE_RECIPE, DELETE_RECIPE, GET_RECIPE, GET_RECIPES, SELECT_RECIPE, CLEAR_RECIPE, RECEIVE_RECIPES } from '../recipeActionTypes'
 
 const initialState = {
+    isGetting: false,
+    isBroken: false,
     allIds: [],
     byId: {},
     selectedId: null,
@@ -9,18 +11,29 @@ const initialState = {
 export default function (state = initialState, action) {
     switch(action.type) {
         case GET_RECIPES: {
+            return Object.assign({}, state, {
+                isGetting: true
+            })
+        }
+        case RECEIVE_RECIPES: {
+            console.log('received')
             const { data } = action.payload
-            const dataIds = data.map(recipe => recipe.id)
-            const recipesById = {}
-
-            data.forEach(recipe => {
-                recipesById[recipe.id] = {...recipe}
-            });
-            return {
-                ...state,
-                allIds: dataIds,
-                byId: recipesById
-
+            if(action.payload !== 'error') {
+                const dataIds = data.map(recipe => recipe.id)
+                const recipesById = {}
+    
+                data.forEach(recipe => {
+                    recipesById[recipe.id] = {...recipe}
+                });
+                return Object.assign({}, state, {
+                    isGetting: false,
+                    allIds: dataIds,
+                    byId: recipesById
+                })
+            } else {
+                return Object.assign({}, state, {
+                    isBroken: true
+                })
             }
         }
         case ADD_RECIPE: {
@@ -50,7 +63,7 @@ export default function (state = initialState, action) {
         }
         case SELECT_RECIPE: {
             
-            const  id  = action.payload
+            const  id  = action.id
             
             return {
                 ...state,
