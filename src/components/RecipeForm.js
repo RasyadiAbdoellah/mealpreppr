@@ -95,8 +95,5 @@ let RecipeForm = reduxForm({
     form: 'recipe'
 })(RecipeFormClass)
 
-//adding access to other state objects
-RecipeForm = connect(mapStateToProps, { addRecipe, updateRecipe })(RecipeForm)
-
-//exporting the complete connected component
-export default RecipeForm
+//adding access to other state objects and export
+export default connect(mapStateToProps, { addRecipe, updateRecipe })(RecipeForm)
