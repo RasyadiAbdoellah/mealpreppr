@@ -12,3 +12,69 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.flex-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+}
+
+#recipe-list {
+  flex: 3 1 auto;
+  left:0;
+  width:60%;
+  z-index: 0;
+  padding: 20px;
+}
+
+#recipe-detail {
+  flex: 1 1 auto;
+  right:0;
+  width:40%;
+  z-index: 99;
+  padding: 20px;
+}
+.titleField{
+  margin: 5px 5px 0 0;
+  padding: 5px 2px 0 2px;
+  border: none;
+  border-bottom: 2px solid #6f6f6f;
+  font:inherit;
+  font-weight: bold;
+  font-size: 2em;
+
+}
+
+.quantField{
+  max-width: 2rem;
+}
+.scaleField{
+  max-width: 5rem;
+}
+.nameField{
+  min-width: 7rem;
+
+}
+
+.quantField, .scaleField, .nameField {
+  margin: 5px 5px 0 0;
+  padding: 5px 2px 1px 3px;
+  border: none;
+  border-bottom: 2px solid #6f6f6f;
+  font:inherit;
+  flex: 0 1 auto;
+}
+
+.quantField::placeholder, .scaleField::placeholder, .nameField::placeholder, .titleField::placeholder{
+  color: #a1a1a1;
+}
+
+.ingredientFields{
+  display:flex;
+  flex-flow: row nowrap;
+}
+.ingredients{
+  list-style: none;
+  display:flex;
+  flex-direction: column;
+}

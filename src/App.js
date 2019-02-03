@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
 import { RecipeContainer } from './containers';
-import { getRecipesList } from './redux/selectors';
+import {Nav} from './components'
 
 export default class App extends Component {
   constructor(props){
@@ -17,7 +16,11 @@ render(){
     return (
         <HashRouter>
             <div className="App">
-                <Route path='/recipes' component={RecipeContainer}/>
+                <Nav/>
+                <div className='flex-container'>
+                    <Route path='/recipes' component={RecipeContainer}/>
+                
+                </div>
             </div>
         </HashRouter>
     )

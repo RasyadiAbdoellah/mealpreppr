@@ -12,44 +12,49 @@ import { clearRecipe } from '../redux/actions/recipe'
 // edit button toggles the JSX fragment shown 
 class RecipeDetail extends React.Component{
     constructor(props){
-        super()
+        super(props)
+        console.log(this.props)
         this.state = {
-            isEditing: false
+            
+            showInput: false
         }
     }
 
     toggleEdit = () => {
-        this.setState({ isEditing: !this.state.isEditing })
+        this.setState({ showInput: !this.state.showInput })
     }
 
     render(){
-        const { recipe } = this.props
-        // fragment rendered is changed depending on the local isEditing state
-        let fragment = this.state.isEditing ? (
+        const { recipe, match } = this.props
+        console.log('recipeDetail state',this.state)
+        console.log('recipeDetail props', this.props)
+        // fragment rendered is changed depending on the local showInput state
+        let fragment = (this.state.showInput || match.params.id === 'new') ? (
             <>
-                <RecipeForm id={recipe.id} toggle={this.toggleEdit}/>
+                <RecipeForm id={(recipe && match.params.id !== 'new') ? recipe.id : null} toggle={this.toggleEdit}/>
             </>
         //ternary operator below is checks whether recipe is defined yet. if not, then nothing is rendered
-        ) : ( !recipe ? null :(
+        ) : ( recipe ? (
             <>
-                <p>Name:{recipe.name}</p>
-                <p>ID: {recipe.id}</p>
-                <p>Details: {recipe.details}</p>
-                <ul>
+                <h1>{recipe.name}</h1>
+                <h2>Ingredients</h2>
+                <ul className='ingredients'>
                     {recipe.Ingredients && recipe.Ingredients.map(ingredient => (
                         <li key={ingredient.name}>
                             <p>{ingredient.val} {ingredient.scale} {ingredient.name}</p>
                         </li>
                     ))}
                 </ul>
+                <h2>Instructions</h2>
+                <p>{recipe.details}</p>
             </>
-        )
+        ) : null
         )
         
         return (
-            <div id='recipe'>
+            <div id='recipe-detail'>
                 <Link to='/recipes' type='button'> X </Link>
-                <button onClick={this.toggleEdit}> Edit </button>
+                {(match.params.id !== 'new' && <button onClick={this.toggleEdit}> Edit </button>)}
                 {fragment}
             </div>
         )
