@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {RecipeForm, RecipeList, RecipeExpanded} from './components';
-import { getStateRecipes ,getRecipeById } from './redux/selectors';
+import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
+import { RecipeContainer } from './containers';
+import { getRecipesList } from './redux/selectors';
 
-class App extends Component {
+export default class App extends Component {
   constructor(props){
     super()
     this.state = {
@@ -12,29 +13,13 @@ class App extends Component {
         
     }
 }
-
-toggleRecipeList = () => {
-    this.setState({
-        displayRecipeList: !this.state.displayRecipeList
-    })
-}
-
-toggleRecipeForm = () => {
-    this.setState({
-        displayRecipeForm: !this.state.displayRecipeForm
-    })
-}
-
 render(){
-    const {selectedRecipe} = this.props 
     return (
-        <div className="App">
-            <button onClick={this.toggleRecipeList}> My Recipe </button>
-            <button onClick ={this.toggleRecipeForm}> Add Recipe </button>
-            {this.state.displayRecipeForm && <RecipeForm toggle={this.toggleRecipeForm}/>}
-            {this.state.displayRecipeList && <RecipeList/>}
-            {selectedRecipe && <RecipeExpanded recipe={selectedRecipe}/>}
-        </div>
+        <HashRouter>
+            <div className="App">
+                <Route path='/recipes' component={RecipeContainer}/>
+            </div>
+        </HashRouter>
     )
 }
 
@@ -42,10 +27,5 @@ render(){
 
 }
 
-function mapStateToProps(state){
 
-    const selectedRecipe = getRecipeById(state, getStateRecipes(state).selectedId)
-    return { selectedRecipe }
-}
 
-export default connect(mapStateToProps)(App);
