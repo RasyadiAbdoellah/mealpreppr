@@ -6,6 +6,16 @@ import { getRecipeById } from '../redux/selectors'
 import axios from 'axios';
 import API_URL from '../config';
 
+const RenderField = (field) => {
+    return(
+        <>
+            <input {...field.input} className={field.className} type={field.type} placeholder={field.placeholder}/>
+            {field.meta.touched && field.meta.error &&
+            <span className="error">{field.meta.error}</span>}
+        </>
+    )
+}
+
 const IngredientItem = (ingredient, index, fields) => {
 // IngredientItem is callback function passed to array .map function in IngredientFieldArray
     // determine what button to display
@@ -15,11 +25,13 @@ const IngredientItem = (ingredient, index, fields) => {
 
     return (
         <li key={index}>
-            <Field name={`${ingredient}.val`} component='input' type='number' />
-            <Field name={`${ingredient}.scale`} component='input' type='text' />
-            <Field name={`${ingredient}.name`} component='input' type='text' />
-            {remove}
-            {add}
+            <div className='ingredientFields'>
+                <Field className='quantField' name={`${ingredient}.val`} component={RenderField} type='number' placeholder='0'/>
+                <Field className='scaleField' name={`${ingredient}.scale`} component={RenderField} type='text' placeholder='Measure'/>
+                <Field className='nameField' name={`${ingredient}.name`} component={RenderField} type='text' placeholder='Ingredient'/>
+                {remove}
+                {add}
+            </div>
         </li>
     )
 }
@@ -32,7 +44,7 @@ const IngredientFieldArray = props => {
     if(fields.length === 0) fields.push();
 
     return (
-        <ul>
+        <ul className='ingredients'>
             {fields.map(IngredientItem)}
         </ul>
         
@@ -75,10 +87,11 @@ class RecipeFormClass extends React.Component {
         const { handleSubmit } = this.props
         return (
             <form onSubmit={handleSubmit(this.submit)}>
-                <Field name='name' component='input' type='text' />
-                <Field name='details' component='textarea' />
+                <Field className='titleField' name='name' component={RenderField} type='text' placeholder='Recipe Name' />
+                <h2>Ingredients</h2>
                 <FieldArray name='Ingredients' component={IngredientFieldArray}/>
-                <button type="submit">Submit</button>
+                <Field name='details' component='textarea' />
+                <button type="submit">Save</button>
             </form>
         )
     }
