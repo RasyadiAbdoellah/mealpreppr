@@ -4,21 +4,20 @@ import { Link } from 'react-router-dom';
 function RecipeCard(props) {
     const { recipe, match } = props
     return (
-        <li key={recipe.id}>
+        <div key={recipe.id}>
             <Link to={`${match.url}/${recipe.id}`}>
-                <p>Name:{recipe.name}</p>
-                <p>Details: {recipe.details}</p>
+                <div className='recipe-card' >
+                    <h1>{recipe.name}</h1>
+                </div>
             </Link>
-        </li>
+        </div>
     )
 }
 
 export default function RecipeList(props){
         return (
-            <div id='recipe-list'>
-                <ul>
-                    {props.recipes.map(recipe => <RecipeCard recipe={recipe} {...props}/>)} 
-                </ul>
+            <div className='recipe-collection'>
+                {props.recipes.map(recipe => <RecipeCard recipe={recipe} {...props}/>)} 
             </div>
         )
     }

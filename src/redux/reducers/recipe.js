@@ -16,7 +16,6 @@ export default function (state = initialState, action) {
             })
         }
         case RECEIVE_RECIPES: {
-            console.log('received')
             const { data } = action.payload
             if(action.payload !== 'error') {
                 const dataIds = data.map(recipe => recipe.id)

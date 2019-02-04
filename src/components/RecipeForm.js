@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import { addRecipe, updateRecipe } from '../redux/actions/recipe'
 import { getRecipeById } from '../redux/selectors'
@@ -16,19 +17,32 @@ const RenderField = (field) => {
     )
 }
 
+const RenderTextArea = (field) => {
+
+    return(
+        <>
+            <textarea {...field.input} className={field.className}>
+                {field.input.value}
+            </textarea>
+            {field.meta.touched && field.meta.error &&
+            <span className="error">{field.meta.error}</span>}
+        </>
+    )
+}
+
 const IngredientItem = (ingredient, index, fields) => {
 // IngredientItem is callback function passed to array .map function in IngredientFieldArray
     // determine what button to display
     let add, remove
-    if (fields.length > 1 && index !== fields.length-1) remove = (<button type='button' onClick={() => fields.remove(index)}> - </button>); //if Ingredients array is more than 1, and current element is not last, show remove button
+    if (fields.length > 1) remove = (<button type='button' onClick={() => fields.remove(index)}> - </button>); //if Ingredients array is more than 1, and current element is not last, show remove button
     if (fields.length === 0 || index === fields.length-1) add = (<button type='button' onClick={() => fields.push()}> + </button>); //if Ingredient array is empty, or current element is last, show add button
 
     return (
         <li key={index}>
             <div className='ingredientFields'>
-                <Field className='quantField' name={`${ingredient}.val`} component={RenderField} type='number' placeholder='0'/>
-                <Field className='scaleField' name={`${ingredient}.scale`} component={RenderField} type='text' placeholder='Measure'/>
-                <Field className='nameField' name={`${ingredient}.name`} component={RenderField} type='text' placeholder='Ingredient'/>
+                <Field className='quant-field' name={`${ingredient}.val`} component={RenderField} type='number' placeholder='0'/>
+                <Field className='scale-field' name={`${ingredient}.scale`} component={RenderField} type='text' placeholder='Measure'/>
+                <Field className='name-field' name={`${ingredient}.name`} component={RenderField} type='text' placeholder='Ingredient'/>
                 {remove}
                 {add}
             </div>
@@ -57,15 +71,14 @@ class RecipeFormClass extends React.Component {
 // RecipeForm is a class component because the submit handler requires props.id to determine which axios method to run.
     
     submit = (values) => {
-        const {id, addRecipe, updateRecipe } = this.props
+        const {id, addRecipe, updateRecipe} = this.props
         //data object is there because backend expects data.Recipe. I could change it into just an unamed pojo, seems like a lot of effort to reduce a line from the code tho.
         const data = { Recipe: {...values}}
-        console.log('in submit',data)
 
-        if(!id){
+        if(id === 'new'){
             return axios.post(API_URL + '/recipes', data)
             .then(res => {
-                this.props.toggle()
+                
                 return addRecipe(res)
             })
             .catch(error =>{
@@ -87,11 +100,14 @@ class RecipeFormClass extends React.Component {
         const { handleSubmit } = this.props
         return (
             <form onSubmit={handleSubmit(this.submit)}>
-                <Field className='titleField' name='name' component={RenderField} type='text' placeholder='Recipe Name' />
+                <Field className='title-field' name='name' component={RenderField} type='text' placeholder='Recipe Name' />
                 <h2>Ingredients</h2>
                 <FieldArray name='Ingredients' component={IngredientFieldArray}/>
-                <Field name='details' component='textarea' />
-                <button type="submit">Save</button>
+                <h2>Instructions</h2>
+                <Field className='detail-text-area' name='details' component={RenderTextArea} />
+                <div>
+                    <button type="submit">Save</button>
+                </div>
             </form>
         )
     }

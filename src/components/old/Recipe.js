@@ -7,7 +7,6 @@ import {default as API_URL} from '../config.js'
 export default class Recipe extends Component {
   constructor(props) {
     super(props);
-    console.log(API_URL)
     this.state = {
       Recipe: {
         name: '',
@@ -62,9 +61,6 @@ export default class Recipe extends Component {
     // Will need to model how data is handled by redux. Should it have multiple objects to handle built vs persisted data?
 
     //TODO: MODEL DATA AND CORRESPONDING LOGIC
-
-    console.log('submit clicked')
-    console.log(this.state)
     const data = this.state
     event.preventDefault()
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link, Route, Switch } from 'react-router-dom'
 
 import { RecipeForm } from '.';
 import { clearRecipe } from '../redux/actions/recipe'
@@ -13,7 +13,6 @@ import { clearRecipe } from '../redux/actions/recipe'
 class RecipeDetail extends React.Component{
     constructor(props){
         super(props)
-        console.log(this.props)
         this.state = {
             
             showInput: false
@@ -26,36 +25,49 @@ class RecipeDetail extends React.Component{
 
     render(){
         const { recipe, match } = this.props
-        console.log('recipeDetail state',this.state)
-        console.log('recipeDetail props', this.props)
         // fragment rendered is changed depending on the local showInput state
-        let fragment = (this.state.showInput || match.params.id === 'new') ? (
+        let fragment;
+        if(recipe && (recipe.id === +match.params.id)){
+            fragment = (
             <>
-                <RecipeForm id={(recipe && match.params.id !== 'new') ? recipe.id : null} toggle={this.toggleEdit}/>
-            </>
-        //ternary operator below is checks whether recipe is defined yet. if not, then nothing is rendered
-        ) : ( recipe ? (
-            <>
+                {(match.params.id !== 'new' && <Link to={`${match.url}/edit`}> Edit </Link>)}
                 <h1>{recipe.name}</h1>
                 <h2>Ingredients</h2>
                 <ul className='ingredients'>
                     {recipe.Ingredients && recipe.Ingredients.map(ingredient => (
-                        <li key={ingredient.name}>
-                            <p>{ingredient.val} {ingredient.scale} {ingredient.name}</p>
+                        <li className='ingredient-entry' key={ingredient.name}>
+                            <span>{ingredient.val} {ingredient.scale} {ingredient.name}</span>
                         </li>
                     ))}
                 </ul>
                 <h2>Instructions</h2>
-                <p>{recipe.details}</p>
+                <div>{recipe.details}</div>
             </>
-        ) : null
-        )
+            )
+        } else if(match.params.id ==='new') {
+            fragment = <RecipeForm toggle={this.toggleEdit}/>
+        } else {
+            fragment = null
+        }
         
         return (
-            <div id='recipe-detail'>
+            <div id='detail'>
                 <Link to='/recipes' type='button'> X </Link>
-                {(match.params.id !== 'new' && <button onClick={this.toggleEdit}> Edit </button>)}
-                {fragment}
+                <Switch>
+                    <Route exact path={`${match.url}`} render={props => {
+                        return ( 
+                           fragment
+                       )
+                    }}/>
+                    <Route path={`${match.url}/edit`} render={props=> {
+                        return (
+                            <>
+                                <Link to={`${match.url}`}> Cancel </Link>
+                                <RecipeForm id={match.params.id} toggle={this.toggleEdit}/>
+                            </>
+                        )
+                    }}/>
+                </Switch>
             </div>
         )
     }
