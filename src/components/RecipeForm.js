@@ -69,17 +69,25 @@ const IngredientFieldArray = props => {
 
 class RecipeFormClass extends React.Component {
 // RecipeForm is a class component because the submit handler requires props.id to determine which axios method to run.
+constructor(props){
+    super()
+    this.state = {
+        postSuccessful: false,
+        postId:'',
+        patchSuccessful: false,
+    }
+}
     
     submit = (values) => {
         const {id, addRecipe, updateRecipe} = this.props
         //data object is there because backend expects data.Recipe. I could change it into just an unamed pojo, seems like a lot of effort to reduce a line from the code tho.
         const data = { Recipe: {...values}}
-
-        if(id === 'new'){
+        console.log(id)
+        if(id === 'new' ){
             return axios.post(API_URL + '/recipes', data)
             .then(res => {
-                
-                return addRecipe(res)
+                addRecipe(res)
+                this.setState({postSuccessful: true, postId: res.data.id})
             })
             .catch(error =>{
                 console.log(error)
@@ -87,8 +95,8 @@ class RecipeFormClass extends React.Component {
         } else {
             return axios.patch(API_URL + '/recipes/' + id, data)
             .then(res => {
-                this.props.toggle()
                 updateRecipe(res)
+                this.setState({patchSuccessful:true })
             })
             .catch(error =>{
                 console.log(error)
@@ -97,7 +105,10 @@ class RecipeFormClass extends React.Component {
     }
 
     render(){
-        const { handleSubmit } = this.props
+        const { handleSubmit, id } = this.props
+        const { postSuccessful, patchSuccessful, postId } = this.state
+        if(postSuccessful) return <Redirect to={`/recipes/${postId}`} />;
+        if(patchSuccessful) return <Redirect to={`/recipes/${id}`} />;
         return (
             <form onSubmit={handleSubmit(this.submit)}>
                 <Field className='title-field' name='name' component={RenderField} type='text' placeholder='Recipe Name' />
