@@ -45,7 +45,7 @@ class RecipeDetail extends React.Component{
             </>
             )
         } else if(match.params.id ==='new') {
-            fragment = <RecipeForm toggle={this.toggleEdit}/>
+            fragment = <RecipeForm id={match.params.id}/>
         } else {
             fragment = null
         }
