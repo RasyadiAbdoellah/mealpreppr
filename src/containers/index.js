@@ -1,1 +1,1 @@
-export { default as RecipeContainer } from './RecipeContainer';
+export { default as MainContainer } from './MainContainer';

@@ -16,25 +16,31 @@ code {
 .flex-container {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
-#recipe-list {
+#navbar {
+  width: 100%;
+  display: flex;
+  max-height: 2rem;
+}
+
+#main {
   flex: 3 1 auto;
   left:0;
-  width:60%;
   z-index: 0;
   padding: 20px;
+  align-items: flex-start;
 }
 
-#recipe-detail {
+#detail {
   flex: 1 1 auto;
   right:0;
   width:40%;
-  z-index: 99;
+  max-width:40%;
   padding: 20px;
 }
-.titleField{
+.title-field{
   margin: 5px 5px 0 0;
   padding: 5px 2px 0 2px;
   border: none;
@@ -45,27 +51,33 @@ code {
 
 }
 
-.quantField{
+.quant-field{
   max-width: 2rem;
 }
-.scaleField{
+.scale-field{
   max-width: 5rem;
 }
-.nameField{
+.name-field{
   min-width: 7rem;
 
 }
-
-.quantField, .scaleField, .nameField {
+.quant-field, .scale-field, .name-field {
   margin: 5px 5px 0 0;
   padding: 5px 2px 1px 3px;
   border: none;
-  border-bottom: 2px solid #6f6f6f;
+  border-bottom: 2px solid #c2c2c2;
   font:inherit;
   flex: 0 1 auto;
 }
 
-.quantField::placeholder, .scaleField::placeholder, .nameField::placeholder, .titleField::placeholder{
+.detail-text-area{
+  width:80%;
+  height: 25vh;
+  font:inherit;
+  border: 1px solid #c2c2c2;
+}
+
+.quant-field::placeholder, .scale-field::placeholder, .name-field::placeholder, .title-field::placeholder{
   color: #a1a1a1;
 }
 
@@ -77,4 +89,25 @@ code {
   list-style: none;
   display:flex;
   flex-direction: column;
+}
+.ingredient-entry{
+  margin: 5px 5px 0 0;
+  padding: 5px 2px 1px 3px;
+  font:inherit;
+  flex: 0 1 auto;
+}
+
+.recipe-collection {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: left;
+  list-style: none;
+}
+.recipe-card{
+  box-sizing: border-box;
+  border: 1px solid #c2c2c2;
+  width: 200px;
+  height: 200px;
+  margin: 1rem;
+  padding: 1rem;
 }

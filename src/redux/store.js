@@ -25,7 +25,7 @@ const saveState = (state) => {
   }
 };
 
-const persistedState = {}
+const persistedState = loadState()
 
 
 

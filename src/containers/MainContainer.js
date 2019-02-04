@@ -7,33 +7,28 @@ import { Route } from 'react-router-dom'
 
 import { getAllRecipes, selectRecipe } from '../redux/actions/recipe'
 import { getRecipesList, getStateRecipes } from '../redux/selectors';
-import {RecipeForm, RecipeList, RecipeDetail} from '../components';
+import {RecipeForm, RecipeList, RecipeDetail, Nav} from '../components';
 
 class RecipeContainer extends React.Component {
   constructor(props){
-    super()
-    this.get()
+    super(props)
+    this.props.getAllRecipes()
   }
 
-  get = () => {
-    axios.get(API_URL + '/recipes')
-        .then(res =>this.props.getAllRecipes(res))
-        .catch(error => console.log(error))
-}
-
   render(){
-    const { recipeList, recipeIsGetting, match } = this.props 
-    console.log('ind render', recipeList)
-  
+    const { recipeList, recipeIsGetting } = this.props 
     return (
       <>
-        <RecipeList recipes={recipeList} {...this.props} />
+        <div id='main'>
+          <Nav id='navbar'/>
+          <Route path='/recipes' render={props =>{
+            return <RecipeList recipes={recipeList} {...props} />
+          }} />
+        </div>
 
-        <Route path={`${match.path}/:id`} render={(props) => {
-          
+        <Route path='/recipes/:id' render={(props) => {
           const recipe = recipeList.find(recipe => recipe.id === +props.match.params.id)
-          const returnValue = recipeIsGetting ? <p>loading...</p> : <RecipeDetail {...props} recipe={recipe}/>
-          return returnValue
+          return <RecipeDetail {...props} recipe={recipe}/>
         }}/>
       </>
     )

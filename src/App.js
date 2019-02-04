@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
-import { RecipeContainer } from './containers';
+import { MainContainer } from './containers';
 import {Nav} from './components'
 
 export default class App extends Component {
@@ -16,9 +16,8 @@ render(){
     return (
         <HashRouter>
             <div className="App">
-                <Nav/>
                 <div className='flex-container'>
-                    <Route path='/recipes' component={RecipeContainer}/>
+                    <Route path='/' component={MainContainer}/>
                 
                 </div>
             </div>
