@@ -1,15 +1,14 @@
 import React from 'react';
 import { connect } from "react-redux";
-import * as axios from 'axios';
-import API_URL from '../config';
 import { Route } from 'react-router-dom'
 // import { RouteWithProps } from '../bin'
 
-import { getAllRecipes, selectRecipe } from '../redux/actions/recipe'
+import { getAllRecipes } from '../redux/actions/recipe'
 import { getRecipesList, getStateRecipes } from '../redux/selectors';
-import {RecipeForm, RecipeList, RecipeDetail, Nav} from '../components';
+import { RecipeList, Nav} from '../components';
+import { RecipeDetailsContainer } from '.';
 
-class RecipeContainer extends React.Component {
+class MainContainer extends React.Component {
   constructor(props){
     super(props)
     this.props.getAllRecipes()
@@ -22,14 +21,11 @@ class RecipeContainer extends React.Component {
         <div id='main'>
           <Nav id='navbar'/>
           <Route path='/recipes' render={props =>{
-            return <RecipeList recipes={recipeList} {...props} />
+            return recipeIsGetting ? <p>Loading...</p> : <RecipeList recipes={recipeList} {...props} />
           }} />
         </div>
 
-        <Route path='/recipes/:id' render={(props) => {
-          const recipe = recipeList.find(recipe => recipe.id === +props.match.params.id)
-          return <RecipeDetail {...props} recipe={recipe}/>
-        }}/>
+        <Route path='/recipes/:id' component={RecipeDetailsContainer}/>
       </>
     )
 }
@@ -45,4 +41,4 @@ function mapStateToProps(state){
 }
 
 //exports the connected component
-export default connect( mapStateToProps, { getAllRecipes })(RecipeContainer)
+export default connect( mapStateToProps, { getAllRecipes })(MainContainer)
