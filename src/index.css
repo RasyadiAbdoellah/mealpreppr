@@ -26,18 +26,16 @@ code {
 }
 
 #main {
-  flex: 3 1 auto;
+  flex: 1 1 100%;
   left:0;
   z-index: 0;
   padding: 20px;
   align-items: flex-start;
 }
-
+/* Detail is a third of the full desktop page. Since the top level container is flex nowrap, main and detail will take 50% of the screen evenly. Setting detail to 60% will equal to 30% of the screen since 30% of 100 is 60% of 50. */
 #detail {
-  flex: 1 1 auto;
+  flex: 1 1 60%;
   right:0;
-  width:40%;
-  max-width:40%;
   padding: 20px;
 }
 .title-field{
