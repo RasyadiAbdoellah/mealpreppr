@@ -37,7 +37,7 @@ class Details extends React.Component{
                             </>
                        )
                     }}/>
-                    <Route path={`${match.url}/edit`} render={props=> {
+                    <Route path={`${match.url}/edit`} render={()=> {
                         return (
                             <>
                                 <Link to={`${match.url}`}> Cancel </Link>
