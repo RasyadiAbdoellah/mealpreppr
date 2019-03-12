@@ -17,11 +17,11 @@ class Details extends React.Component{
         // fragment rendered is changed depending on the local showInput state
         return (
             <div id='detail'>
-                <Link to='/recipes' type='button'> X </Link>
                 <Switch>
                     <Route exact path='/recipes/new' render={() => {
                         return (
                             <>
+                                <Link to='/recipes' type='button'> Cancel </Link>
                                 <RecipeForm id='new' />
                             </>
                         )
@@ -31,6 +31,7 @@ class Details extends React.Component{
                         return ( 
                             <>
                                 {/* Match.url below should be /recipes/:id so the Link to should = recipes/1/edit when done correctly */}
+                                <Link to='/recipes' type='button'> X </Link>
                                 <Link to={`${match.url}/edit`}> Edit </Link>
                                 <RecipeDetails id={match.params.id} recipe={recipe} /> 
                             </>
