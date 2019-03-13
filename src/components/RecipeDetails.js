@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
 
 
 export default function RecipeDetails(props) {
@@ -16,7 +17,7 @@ export default function RecipeDetails(props) {
             ))}
         </ul>
         <h2>Instructions</h2>
-        <div>{recipe.details}</div>
+        <div>{ReactHtmlParser(recipe.details)}</div>
       </>
     )
   } else {

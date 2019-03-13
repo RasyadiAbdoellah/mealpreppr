@@ -6,8 +6,29 @@ import { addRecipe, updateRecipe } from '../redux/actions/recipe'
 import { getRecipeById } from '../redux/selectors'
 import axios from 'axios';
 import API_URL from '../config';
+import ReactQuill from 'react-quill';
+
+const renderQuill = ({ input }) => {
+  return (
+    <ReactQuill
+      {...input}
+      onChange={(newValue, delta, source) => {
+        if (source === 'user') {
+          input.onChange(newValue);
+        }
+      }}
+      onBlur={(range, source, quill) => {
+        input.onBlur(quill.getHTML());
+      }}
+    />
+  );  
+}
+
+// Usage:
+{/* <Field name="description" component={renderQuill} />; */}
 
 const RenderField = (field) => {
+    //creates custom input for Field component
     return(
         <>
             <input {...field.input} className={field.className} type={field.type} placeholder={field.placeholder}/>
@@ -18,7 +39,7 @@ const RenderField = (field) => {
 }
 
 const RenderTextArea = (field) => {
-
+    //creates custom textarea for Field component
     return(
         <>
             <textarea {...field.input} className={field.className}>
@@ -32,7 +53,7 @@ const RenderTextArea = (field) => {
 
 const IngredientItem = (ingredient, index, fields) => {
 // IngredientItem is callback function passed to array .map function in IngredientFieldArray
-    // determine what button to display
+// determine what button to display
     let add, remove
     if (fields.length > 1) remove = (<button type='button' onClick={() => fields.remove(index)}> - </button>); //if Ingredients array is more than 1, and current element is not last, show remove button
     if (fields.length === 0 || index === fields.length-1) add = (<button type='button' onClick={() => fields.push()}> + </button>); //if Ingredient array is empty, or current element is last, show add button
@@ -115,7 +136,7 @@ constructor(props){
                 <h2>Ingredients</h2>
                 <FieldArray name='Ingredients' component={IngredientFieldArray}/>
                 <h2>Instructions</h2>
-                <Field className='detail-text-area' name='details' component={RenderTextArea} />
+                <Field className='detail-text-area' name='details' component={renderQuill} />
                 <div>
                     <button type="submit">Save</button>
                 </div>
