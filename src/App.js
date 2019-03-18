@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import { MainContainer } from './containers';
-import {Nav} from './components'
 
 export default class App extends Component {
   constructor(props){

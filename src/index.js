@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store'
 
-import './normalize.css';
-import './index.scss';
+import './style/normalize.css';
+import './style/index.scss';
 
 import 'react-quill/dist/quill.snow.css';
 import App from './App';

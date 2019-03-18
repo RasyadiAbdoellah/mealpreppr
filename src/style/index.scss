@@ -1,10 +1,11 @@
 // Global constants
-@import './typography.scss';
+@import './constants/colours.scss';
+@import './constants/typography.scss';
 
 
 //main is top level styling. All global styles should go in main
 @import './main.scss';
 
 //import component styles here
-@import './components/details.scss';
-@import './components/list.scss';
+@import './recipe-details.scss';
+@import './recipe-list.scss';

@@ -1,7 +1,6 @@
 $font-style-primary: sans-serif;
-$font-color-primary: #333;
 
 body * {
   font-family:  $font-style-primary;
-  color: $font-color-primary;
+  color: $text-dark;
 }

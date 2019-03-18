@@ -1,0 +1,41 @@
+// Main.scss is for global and top level container styling.
+
+.flex-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+#navbar {
+  width: 100%;
+  display: flex;
+  a {
+    display:block;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border: solid 1px $dark-gray;
+    border-right: none;
+    &:first-of-type{
+      border-radius: 5px 0 0 5px;
+      margin-left: 1rem;
+    }
+    &:last-of-type{
+      border-radius: 0 5px 5px 0;
+      border: solid 1px $dark-gray;
+
+    }
+    &:hover {
+      background-color: $lighter-gray;
+    }
+  }
+}
+
+#main {
+  flex: 1 1 100%;
+  left:0;
+  z-index: 0;
+  padding: 20px;
+  align-items: flex-start;
+}
+
+

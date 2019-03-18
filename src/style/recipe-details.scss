@@ -5,14 +5,14 @@
   flex: 1 1 60%;
   right:0;
   padding: 20px;
-  box-shadow: 0 0 5px #aaaaaa;
+  box-shadow: 0 0 5px $light-gray;
   height:100vh;
 }
 .title-field{
   margin: 5px 5px 0 0;
   padding: 5px 2px 0 2px;
   border: none;
-  border-bottom: 2px solid #6f6f6f;
+  border-bottom: 2px solid $dark-gray;
   font:inherit;
   font-weight: bold;
   font-size: 2em;
@@ -33,7 +33,7 @@
   margin: 5px 5px 0 0;
   padding: 5px 2px 1px 3px;
   border: none;
-  border-bottom: 2px solid #c2c2c2;
+  border-bottom: 2px solid $border-dark;
   font:inherit;
   flex: 0 1 auto;
 }
@@ -42,11 +42,11 @@
   width:80%;
   height: 25vh;
   font:inherit;
-  border: 1px solid #c2c2c2;
+  border: 1px solid $border-dark;
 }
 
 .quant-field::placeholder, .scale-field::placeholder, .name-field::placeholder, .title-field::placeholder{
-  color: #a1a1a1;
+  color: $light-gray;
 }
 
 .ingredientFields{
