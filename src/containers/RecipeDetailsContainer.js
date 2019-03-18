@@ -54,7 +54,6 @@ class Details extends React.Component{
 function mapStateToProps(state, { match }) {
     const { id } = match.params
     const recipe = getRecipeById(state, id)
-    console.log(recipe)
     return { recipe }
 }
 

@@ -1,0 +1,65 @@
+// Detail is a third of the full desktop page. 
+// Since the top level container is flex nowrap, main and detail will take 50% of the screen evenly. 
+// Setting detail to 60% will equal to 30% of the screen since 30% of 100 is 60% of 50.
+#detail {
+  flex: 1 1 60%;
+  right:0;
+  padding: 20px;
+}
+.title-field{
+  margin: 5px 5px 0 0;
+  padding: 5px 2px 0 2px;
+  border: none;
+  border-bottom: 2px solid #6f6f6f;
+  font:inherit;
+  font-weight: bold;
+  font-size: 2em;
+
+}
+
+.quant-field{
+  max-width: 2rem;
+}
+.scale-field{
+  max-width: 5rem;
+}
+.name-field{
+  min-width: 7rem;
+
+}
+.quant-field, .scale-field, .name-field {
+  margin: 5px 5px 0 0;
+  padding: 5px 2px 1px 3px;
+  border: none;
+  border-bottom: 2px solid #c2c2c2;
+  font:inherit;
+  flex: 0 1 auto;
+}
+
+.detail-text-area{
+  width:80%;
+  height: 25vh;
+  font:inherit;
+  border: 1px solid #c2c2c2;
+}
+
+.quant-field::placeholder, .scale-field::placeholder, .name-field::placeholder, .title-field::placeholder{
+  color: #a1a1a1;
+}
+
+.ingredientFields{
+  display:flex;
+  flex-flow: row nowrap;
+}
+.ingredients{
+  list-style: none;
+  display:flex;
+  flex-direction: column;
+}
+.ingredient-entry{
+  margin: 5px 5px 0 0;
+  padding: 5px 2px 1px 3px;
+  font:inherit;
+  flex: 0 1 auto;
+}
+

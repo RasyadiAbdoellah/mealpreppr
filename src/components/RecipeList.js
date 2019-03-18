@@ -4,13 +4,9 @@ import { Link } from 'react-router-dom';
 function RecipeCard(props) {
     const { recipe, match } = props
     return (
-        <div key={recipe.id}>
-            <Link to={`${match.url}/${recipe.id}`}>
-                <div className='recipe-card' >
-                    <h1>{recipe.name}</h1>
-                </div>
-            </Link>
-        </div>
+        <Link to={`${match.url}/${recipe.id}`} key={recipe.id} className='recipe-card' > 
+                <h1>{recipe.name}</h1>
+        </Link>
     )
 }
 

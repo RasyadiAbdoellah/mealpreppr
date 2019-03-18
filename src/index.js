@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
 import store from './redux/store'
-import './index.scss'
+
+import './normalize.css';
+import './index.scss';
+
 import 'react-quill/dist/quill.snow.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
