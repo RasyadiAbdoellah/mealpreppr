@@ -36,6 +36,9 @@
   border-bottom: 2px solid $border-dark;
   font:inherit;
   flex: 0 1 auto;
+  &::placeholder {
+    color: $light-gray;
+  }
 }
 
 .detail-text-area{
@@ -43,10 +46,6 @@
   height: 25vh;
   font:inherit;
   border: 1px solid $border-dark;
-}
-
-.quant-field::placeholder, .scale-field::placeholder, .name-field::placeholder, .title-field::placeholder{
-  color: $light-gray;
 }
 
 .ingredientFields{

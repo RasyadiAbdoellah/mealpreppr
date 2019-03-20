@@ -13,7 +13,6 @@ import { getRecipeById } from '../redux/selectors'
 class Details extends React.Component{
     render(){
         const { recipe, match } = this.props
-        console.log(match, recipe)
         // fragment rendered is changed depending on the local showInput state
         return (
             <div id='detail'>

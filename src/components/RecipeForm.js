@@ -92,6 +92,7 @@ class RecipeFormClass extends React.Component {
 // RecipeForm is a class component because the submit handler requires props.id to determine which axios method to run.
 constructor(props){
     super()
+    console.log(props)
     this.state = {
         postSuccessful: false,
         postId:'',
@@ -103,7 +104,6 @@ constructor(props){
         const {id, addRecipe, updateRecipe} = this.props
         //data object is there because backend expects data.Recipe. I could change it into just an unamed pojo, seems like a lot of effort to reduce a line from the code tho.
         const data = { Recipe: {...values}}
-        console.log(id)
         if(id === 'new' ){
             return axios.post(API_URL + '/recipes', data)
             .then(res => {
@@ -127,6 +127,7 @@ constructor(props){
 
     render(){
         const { handleSubmit, id } = this.props
+        console.log('in render',this.props.initialValues)
         const { postSuccessful, patchSuccessful, postId } = this.state
         if(postSuccessful) return <Redirect to={`/recipes/${postId}`} />;
         if(patchSuccessful) return <Redirect to={`/recipes/${id}`} />;
@@ -148,12 +149,13 @@ constructor(props){
 // mapStateToProps function is only so that RecipeForm can be reused for editing recipes.
 // the { id } in function sig is because connect passes the state and the component's own props as arguments. In essence the func sig is shorthand for doing const id = component's props.id  
 function mapStateToProps(state, { id }){
-    return {initialValues: getRecipeById(state, id)}
+    return id ==='new' ? {initialValues: {}} : {initialValues: getRecipeById(state, id)}
 }
 
 //adding reduxForm functionality to RecipeFormClass
 let RecipeForm = reduxForm({
-    form: 'recipe'
+    form: 'recipe',
+    enableReinitialize : true
 })(RecipeFormClass)
 
 //adding access to other state objects and export
