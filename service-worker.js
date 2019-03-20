@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/mealprep-frontend/precache-manifest.d4e633c549e91e5331d18002e423c7a7.js"
+  "/mealpreppr/precache-manifest.64f357e9d4f73920364a91fa1800b748.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/mealprep-frontend/index.html", {
+workbox.routing.registerNavigationRoute("/mealpreppr/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });

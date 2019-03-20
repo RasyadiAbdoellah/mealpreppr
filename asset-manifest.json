@@ -1,15 +1,15 @@
 {
-  "main.css": "/mealprep-frontend/static/css/main.c03a2f3d.chunk.css",
-  "main.js": "/mealprep-frontend/static/js/main.22124b97.chunk.js",
-  "main.js.map": "/mealprep-frontend/static/js/main.22124b97.chunk.js.map",
-  "runtime~main.js": "/mealprep-frontend/static/js/runtime~main.313dc6f4.js",
-  "runtime~main.js.map": "/mealprep-frontend/static/js/runtime~main.313dc6f4.js.map",
-  "static/css/2.31a69c76.chunk.css": "/mealprep-frontend/static/css/2.31a69c76.chunk.css",
-  "static/js/2.ce5c3c62.chunk.js": "/mealprep-frontend/static/js/2.ce5c3c62.chunk.js",
-  "static/js/2.ce5c3c62.chunk.js.map": "/mealprep-frontend/static/js/2.ce5c3c62.chunk.js.map",
-  "index.html": "/mealprep-frontend/index.html",
-  "precache-manifest.d4e633c549e91e5331d18002e423c7a7.js": "/mealprep-frontend/precache-manifest.d4e633c549e91e5331d18002e423c7a7.js",
-  "service-worker.js": "/mealprep-frontend/service-worker.js",
-  "static/css/2.31a69c76.chunk.css.map": "/mealprep-frontend/static/css/2.31a69c76.chunk.css.map",
-  "static/css/main.c03a2f3d.chunk.css.map": "/mealprep-frontend/static/css/main.c03a2f3d.chunk.css.map"
+  "main.css": "/mealpreppr/static/css/main.c03a2f3d.chunk.css",
+  "main.js": "/mealpreppr/static/js/main.e98adab3.chunk.js",
+  "main.js.map": "/mealpreppr/static/js/main.e98adab3.chunk.js.map",
+  "runtime~main.js": "/mealpreppr/static/js/runtime~main.fb620bf6.js",
+  "runtime~main.js.map": "/mealpreppr/static/js/runtime~main.fb620bf6.js.map",
+  "static/css/2.31a69c76.chunk.css": "/mealpreppr/static/css/2.31a69c76.chunk.css",
+  "static/js/2.ce5c3c62.chunk.js": "/mealpreppr/static/js/2.ce5c3c62.chunk.js",
+  "static/js/2.ce5c3c62.chunk.js.map": "/mealpreppr/static/js/2.ce5c3c62.chunk.js.map",
+  "index.html": "/mealpreppr/index.html",
+  "precache-manifest.64f357e9d4f73920364a91fa1800b748.js": "/mealpreppr/precache-manifest.64f357e9d4f73920364a91fa1800b748.js",
+  "service-worker.js": "/mealpreppr/service-worker.js",
+  "static/css/2.31a69c76.chunk.css.map": "/mealpreppr/static/css/2.31a69c76.chunk.css.map",
+  "static/css/main.c03a2f3d.chunk.css.map": "/mealpreppr/static/css/main.c03a2f3d.chunk.css.map"
 }
