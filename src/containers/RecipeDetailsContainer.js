@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Route, Switch } from 'react-router-dom'
 
-import { RecipeForm, RecipeDetails } from '../components';
+import { RecipeForm, RecipeDetails, DetailsNav } from '../components';
 import { getRecipeById } from '../redux/selectors'
 
 
@@ -13,14 +13,17 @@ import { getRecipeById } from '../redux/selectors'
 class Details extends React.Component{
     render(){
         const { recipe, match } = this.props
+
         // fragment rendered is changed depending on the local showInput state
-        console.log(match)
         return (
             <div id='detail'>
                 <Switch>
                     <Route exact path='/recipes/new' render={() => {
                         return (
-                             <RecipeForm id='new' />
+                            <>
+                                <DetailsNav match={match} isForm />  
+                                <RecipeForm id='new' />
+                            </>
                         )
                     }}/>
                     <Route exact path={`${match.url}`} render={() => {
@@ -28,14 +31,17 @@ class Details extends React.Component{
                         return ( 
                             <>
                                 {/* Match.url below should be /recipes/:id so the Link to should = recipes/1/edit when done correctly */}
-                                
-                                <RecipeDetails match={match} recipe={recipe} /> 
+                                <DetailsNav match={match} />
+                                <RecipeDetails id={match.params.id} recipe={recipe} /> 
                             </>
                        )
                     }}/>
                     <Route path={`${match.url}/edit`} render={()=> {
                         return (
-                            <RecipeForm id={match.params.id} url={match.url} />
+                            <>
+                                <DetailsNav match={match} isForm />
+                                <RecipeForm id={match.params.id} url={match.url} />
+                            </>
                         )
                     }}/>
                 </Switch>

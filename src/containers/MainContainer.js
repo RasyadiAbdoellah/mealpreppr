@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom'
 
 import { getAllRecipes } from '../redux/actions/recipe'
 import { getRecipesList, getStateRecipes } from '../redux/selectors';
-import { RecipeList, Nav} from '../components';
+import { RecipeList, MainNav} from '../components';
 import { RecipeDetailsContainer } from '.';
 
 class MainContainer extends React.Component {
@@ -19,7 +19,7 @@ class MainContainer extends React.Component {
     return (
       <>
         <div id='main'>
-          <Nav id='navbar'/>
+          <MainNav id='navbar'/>
           <Route path='/recipes' render={props =>{
             return recipeIsGetting ? <p>Loading...</p> : <RecipeList recipes={recipeList} {...props} />
           }} />

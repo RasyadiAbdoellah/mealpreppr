@@ -134,7 +134,6 @@ constructor(props){
 
         return (
             <>
-                <Link to={ url ? `${url}` : '/recipes'}> Cancel </Link>
                 <form onSubmit={handleSubmit(this.submit)}>
                     <Field className='title-field' name='name' component={RenderField} type='text' placeholder='Recipe Name' />
                     <h2>Ingredients</h2>
