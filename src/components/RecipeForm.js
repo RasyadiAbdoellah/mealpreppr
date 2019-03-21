@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import { addRecipe, updateRecipe } from '../redux/actions/recipe'
 import { getRecipeById } from '../redux/selectors'
@@ -126,22 +126,26 @@ constructor(props){
     }
 
     render(){
-        const { handleSubmit, id } = this.props
-        console.log('in render',this.props.initialValues)
-        const { postSuccessful, patchSuccessful, postId } = this.state
+        const { handleSubmit, id, url } = this.props
+        const { postSuccessful, patchSuccessful, postId } = this.state 
+
         if(postSuccessful) return <Redirect to={`/recipes/${postId}`} />;
         if(patchSuccessful) return <Redirect to={`/recipes/${id}`} />;
+
         return (
-            <form onSubmit={handleSubmit(this.submit)}>
-                <Field className='title-field' name='name' component={RenderField} type='text' placeholder='Recipe Name' />
-                <h2>Ingredients</h2>
-                <FieldArray name='Ingredients' component={IngredientFieldArray}/>
-                <h2>Instructions</h2>
-                <Field className='detail-text-area' name='details' component={renderQuill} />
-                <div>
-                    <button type="submit">Save</button>
-                </div>
-            </form>
+            <>
+                <Link to={ url ? `${url}` : '/recipes'}> Cancel </Link>
+                <form onSubmit={handleSubmit(this.submit)}>
+                    <Field className='title-field' name='name' component={RenderField} type='text' placeholder='Recipe Name' />
+                    <h2>Ingredients</h2>
+                    <FieldArray name='Ingredients' component={IngredientFieldArray}/>
+                    <h2>Instructions</h2>
+                    <Field className='detail-text-area' name='details' component={renderQuill} />
+                    <div>
+                        <button type="submit">Save</button>
+                    </div>
+                </form>
+            </>
         )
     }
 }

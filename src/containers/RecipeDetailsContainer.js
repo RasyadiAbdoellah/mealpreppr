@@ -14,15 +14,13 @@ class Details extends React.Component{
     render(){
         const { recipe, match } = this.props
         // fragment rendered is changed depending on the local showInput state
+        console.log(match)
         return (
             <div id='detail'>
                 <Switch>
                     <Route exact path='/recipes/new' render={() => {
                         return (
-                            <>
-                                <Link to='/recipes' type='button'> Cancel </Link>
-                                <RecipeForm id='new' />
-                            </>
+                             <RecipeForm id='new' />
                         )
                     }}/>
                     <Route exact path={`${match.url}`} render={() => {
@@ -30,18 +28,14 @@ class Details extends React.Component{
                         return ( 
                             <>
                                 {/* Match.url below should be /recipes/:id so the Link to should = recipes/1/edit when done correctly */}
-                                <Link to='/recipes' type='button'> X </Link>
-                                <Link to={`${match.url}/edit`}> Edit </Link>
-                                <RecipeDetails id={match.params.id} recipe={recipe} /> 
+                                
+                                <RecipeDetails match={match} recipe={recipe} /> 
                             </>
                        )
                     }}/>
                     <Route path={`${match.url}/edit`} render={()=> {
                         return (
-                            <>
-                                <Link to={`${match.url}`}> Cancel </Link>
-                                <RecipeForm id={match.params.id} />
-                            </>
+                            <RecipeForm id={match.params.id} url={match.url} />
                         )
                     }}/>
                 </Switch>
