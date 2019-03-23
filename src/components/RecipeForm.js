@@ -126,7 +126,7 @@ constructor(props){
     }
 
     render(){
-        const { handleSubmit, id, url } = this.props
+        const { handleSubmit, id } = this.props
         const { postSuccessful, patchSuccessful, postId } = this.state 
 
         if(postSuccessful) return <Redirect to={`/recipes/${postId}`} />;

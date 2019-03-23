@@ -4,6 +4,7 @@ import { Link, Route, Switch } from 'react-router-dom'
 
 import { RecipeForm, RecipeDetails, DetailsNav } from '../components';
 import { getRecipeById } from '../redux/selectors'
+import { deleteSelectedRecipe } from '../redux/actions/recipe';
 
 
 
@@ -12,7 +13,7 @@ import { getRecipeById } from '../redux/selectors'
 // edit button toggles the JSX fragment shown 
 class Details extends React.Component{
     render(){
-        const { recipe, match } = this.props
+        const { recipe, match, deleteSelectedRecipe } = this.props
 
         // fragment rendered is changed depending on the local showInput state
         return (
@@ -31,7 +32,7 @@ class Details extends React.Component{
                         return ( 
                             <>
                                 {/* Match.url below should be /recipes/:id so the Link to should = recipes/1/edit when done correctly */}
-                                <DetailsNav match={match} />
+                                <DetailsNav match={match} deleteSelectedRecipe={deleteSelectedRecipe}/>
                                 <RecipeDetails id={match.params.id} recipe={recipe} /> 
                             </>
                        )
@@ -40,7 +41,7 @@ class Details extends React.Component{
                         return (
                             <>
                                 <DetailsNav match={match} isForm />
-                                <RecipeForm id={match.params.id} url={match.url} />
+                                <RecipeForm id={match.params.id} />
                             </>
                         )
                     }}/>
@@ -50,10 +51,9 @@ class Details extends React.Component{
     }
 }
 
-function mapStateToProps(state, { match }) {
-    const { id } = match.params
+function mapStateToProps(state, { match:{ params: { id } } }) {
     const recipe = getRecipeById(state, id)
     return { recipe }
 }
 
-export default connect(mapStateToProps)(Details)
+export default connect(mapStateToProps, { deleteSelectedRecipe })(Details)

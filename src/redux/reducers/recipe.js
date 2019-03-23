@@ -1,8 +1,15 @@
-import { ADD_RECIPE, UPDATE_RECIPE, DELETE_RECIPE, GET_RECIPE, GET_RECIPES, SELECT_RECIPE, CLEAR_RECIPE, RECEIVE_RECIPES } from '../recipeActionTypes'
+import { ADD_RECIPE, UPDATE_RECIPE, DELETING_RECIPE, DELETE_RECIPE, GET_RECIPE, GET_RECIPES, SELECT_RECIPE, CLEAR_RECIPE, RECEIVE_RECIPES } from '../recipeActionTypes'
+import { string } from 'prop-types';
 
 const initialState = {
     isGetting: false,
-    isBroken: false,
+    getFailed: false,
+    deleteFailed: false,
+    postFailed: false,
+    updateFailed: false,
+    errorMessage: '',
+    isDeletingRecipe: false,
+    recipeIdToDelete: null,
     allIds: [],
     byId: {},
     selectedId: null,
@@ -17,7 +24,7 @@ export default function (state = initialState, action) {
         }
         case RECEIVE_RECIPES: {
             const { data } = action.payload
-            if(action.payload !== 'error') {
+            if( data && typeof data !== 'string') {
                 const dataIds = data.map(recipe => recipe.id)
                 const recipesById = {}
     
@@ -26,12 +33,15 @@ export default function (state = initialState, action) {
                 });
                 return Object.assign({}, state, {
                     isGetting: false,
+                    getFailed: false,
                     allIds: dataIds,
                     byId: recipesById
                 })
             } else {
                 return Object.assign({}, state, {
-                    isBroken: true
+                    isGetting: false,
+                    getFailed: true,
+                    errorMessage: action.payload
                 })
             }
         }
@@ -58,6 +68,39 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 byId: recipesById
+            }
+        }
+        case DELETING_RECIPE: {
+            return Object.assign({}, state, {
+                isDeletingRecipe: true,
+                recipeIdToDelete: action.id
+            })
+        }
+        case DELETE_RECIPE: {
+            const res = action.response
+            console.log(res)
+            const id = state.recipeIdToDelete
+            const recipeIds = [...state.allIds]
+            const recipesById = {...state.byId}
+
+            if( !res ){
+                recipeIds.splice(recipeIds.indexOf(+id), 1)
+                delete recipesById[id]
+
+                return Object.assign({}, state, {
+                    isDeletingRecipe: false,
+                    deleteFailed:false,
+                    recipeIdToDelete: null,
+                    allIds: recipeIds,
+                    byId: recipesById,
+
+                })
+            } else {
+                return Object.assign({}, state, {
+                    isDeletingRecipe: false,
+                    deleteFailed: true,
+                    errorMessage: res
+                })
             }
         }
         case SELECT_RECIPE: {

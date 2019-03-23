@@ -15,13 +15,13 @@ class MainContainer extends React.Component {
   }
 
   render(){
-    const { recipeList, recipeIsGetting } = this.props 
+    const { recipeList, recipeIsGetting, recipeGetFailed } = this.props 
     return (
       <>
         <div id='main'>
           <MainNav id='navbar'/>
           <Route path='/recipes' render={props =>{
-            return recipeIsGetting ? <p>Loading...</p> : <RecipeList recipes={recipeList} {...props} />
+            return recipeIsGetting ? <p>Loading...</p> : recipeGetFailed ? <p> Failed to load recipes. Try again later </p> : <RecipeList recipes={recipeList} {...props} />
           }} />
         </div>
 
@@ -36,8 +36,9 @@ class MainContainer extends React.Component {
 function mapStateToProps(state){
   const recipeList = getRecipesList(state)
   const recipeIsGetting = getStateRecipes(state).isGetting
+  const recipeGetFailed = getStateRecipes(state).getFailed
   
-  return { recipeList, recipeIsGetting } 
+  return { recipeList, recipeIsGetting, recipeGetFailed } 
 }
 
 //exports the connected component

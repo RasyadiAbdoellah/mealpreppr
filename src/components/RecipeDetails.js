@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
+import { Redirect } from 'react-router-dom';
 
 export default function RecipeDetails(props) {
   const {recipe, id } = props
@@ -20,6 +21,6 @@ export default function RecipeDetails(props) {
       </>
     )
   } else {
-    return null
+    return <Redirect to='/recipes' />
   }
 }
