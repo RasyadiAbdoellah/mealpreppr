@@ -4,15 +4,15 @@ self.__precacheManifest = [
     "url": "/mealpreppr/static/js/runtime~main.fb620bf6.js"
   },
   {
-    "revision": "deaa618a78827721fcd0",
-    "url": "/mealpreppr/static/js/main.1450abea.chunk.js"
+    "revision": "6facd92a9645ddc44097",
+    "url": "/mealpreppr/static/js/main.aeb723c0.chunk.js"
   },
   {
     "revision": "98221656d38ffd17fb6a",
     "url": "/mealpreppr/static/js/2.6c9741da.chunk.js"
   },
   {
-    "revision": "deaa618a78827721fcd0",
+    "revision": "6facd92a9645ddc44097",
     "url": "/mealpreppr/static/css/main.e2f53673.chunk.css"
   },
   {
@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/mealpreppr/static/css/2.31a69c76.chunk.css"
   },
   {
-    "revision": "9b90890c73e4e6a1345f221fe335bcf6",
+    "revision": "5279505ce9a8678c8631a38fb6d881ad",
     "url": "/mealpreppr/index.html"
   }
 ];
