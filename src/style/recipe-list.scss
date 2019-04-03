@@ -7,7 +7,7 @@
 }
 .recipe-card{
   box-sizing: border-box;
-  border: 1px solid $border-dark;
+  box-shadow: 0 2px 2px $light-gray;
   width: 200px;
   height: 200px;
   margin: 1rem;
@@ -15,6 +15,6 @@
   text-decoration: none;
 
   &:hover{
-    background-color: $lighter-gray;
+    background-color: $lightest-gray;
   }
 }
