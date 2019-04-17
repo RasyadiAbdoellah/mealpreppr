@@ -1,12 +1,11 @@
 import React from 'react';
-import Auth from '../Auth/Auth';
 
 export default class Landing extends React.Component {
-  loginHandler = () => {
+  login = () => {
     this.props.auth.login();
   };
 
-  logoutHandler = () => {
+  logout = () => {
     this.props.auth.logout();
   };
 
@@ -21,11 +20,8 @@ export default class Landing extends React.Component {
     const { isAuthenticated } = this.props.auth;
     return (
       <div>
-        {!isAuthenticated ? (
-          <button onClick={this.loginHandler}> Log In </button>
-        ) : (
-          <button onClick={this.logoutHandler}> Log Out </button>
-        )}
+        {!isAuthenticated() && <button onClick={this.login}>Log In</button>}
+        {isAuthenticated() && <button onClick={this.logout}>Log Out</button>}
       </div>
     );
   }
