@@ -9,26 +9,31 @@ import { RecipeList, MainNav } from '../components';
 import { RecipeDetailsContainer } from '.';
 
 class MainContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.props.getAllRecipes();
-  }
-
   render() {
-    const { recipeList, recipeIsGetting, recipeGetFailed, auth } = this.props;
+    const {
+      recipeList,
+      recipeIsGetting,
+      recipeGetFailed,
+      getAllRecipes,
+      auth,
+    } = this.props;
     return (
       <>
         <div id="main">
-          <MainNav id="navbar" auth={auth} />
+          <MainNav id="navbar" auth={auth} getAllRecipes={getAllRecipes} />
           <Route
             path="/recipes"
             render={props => {
-              return recipeIsGetting ? (
-                <p>Loading...</p>
-              ) : recipeGetFailed ? (
-                <p> Failed to load recipes. Try again later </p>
+              return auth.isAuthenticated() ? (
+                recipeIsGetting ? (
+                  <p>Loading...</p>
+                ) : recipeGetFailed ? (
+                  <p> Failed to load recipes. Try again later </p>
+                ) : (
+                  <RecipeList recipes={recipeList} {...props} />
+                )
               ) : (
-                <RecipeList recipes={recipeList} {...props} />
+                <p>Not logged in!</p>
               );
             }}
           />

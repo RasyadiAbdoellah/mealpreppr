@@ -31,7 +31,9 @@ class Landing extends React.Component {
 export default function(props) {
   return (
     <nav id={props.id}>
-      <NavLink to="/recipes">My Recipes</NavLink>
+      <NavLink to="/recipes" onClick={props.getAllRecipes}>
+        My Recipes
+      </NavLink>
       <NavLink to="/recipes/new">Add Recipe</NavLink>
       <Landing auth={props.auth} />
     </nav>
