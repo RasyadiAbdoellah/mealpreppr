@@ -1,12 +1,13 @@
-import auth0 from "auth0-js";
-import history from "../history";
-export default class Auth {
+import auth0 from 'auth0-js';
+import history from '../history';
+class Auth {
   auth0 = new auth0.WebAuth({
-    domain: "mealprepr.auth0.com",
-    clientID: "Om5Q7N90qxCMySOfW9pTr2nix8PjbEHs",
-    redirectUri: "http://localhost:3000/callback",
-    responseType: "token id_token",
-    scope: "openid"
+    domain: 'mealprepr.auth0.com',
+    clientID: 'Om5Q7N90qxCMySOfW9pTr2nix8PjbEHs',
+    redirectUri: 'http://localhost:3000/callback',
+    responseType: 'token id_token',
+    audience: 'https://stark-beach-91865.herokuapp.com/',
+    scope: 'openid profile access:admin',
   });
 
   accessToken;
@@ -22,7 +23,7 @@ export default class Auth {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
       } else if (err) {
-        history.replace("/");
+        history.replace('/');
         console.log(err);
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
@@ -39,7 +40,7 @@ export default class Auth {
 
   setSession = authResult => {
     // Set isLoggedIn flag in localStorage
-    localStorage.setItem("isLoggedIn", "true");
+    localStorage.setItem('isLoggedIn', 'true');
     console.log(authResult);
     // Set the time that the access token will expire at
     let expiresAt = authResult.expiresIn * 1000 + new Date().getTime();
@@ -48,7 +49,7 @@ export default class Auth {
     this.expiresAt = expiresAt;
 
     // navigate to the home route
-    history.replace("/");
+    history.replace('/');
   };
 
   renewSession = () => {
@@ -59,7 +60,7 @@ export default class Auth {
         this.logout();
         console.log(err);
         alert(
-          `Could not get a new token (${err.error}: ${err.error_description}).`
+          `Could not get a new token (${err.error}: ${err.error_description}).`,
         );
       }
     });
@@ -72,14 +73,14 @@ export default class Auth {
     this.expiresAt = 0;
 
     // Remove isLoggedIn flag from localStorage
-    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem('isLoggedIn');
 
     this.auth0.logout({
-      return_to: window.location.origin
+      return_to: window.location.origin,
     });
 
     // navigate to the home route
-    history.replace("/");
+    history.replace('/');
   };
 
   isAuthenticated = () => {
@@ -89,3 +90,7 @@ export default class Auth {
     return new Date().getTime() < expiresAt;
   };
 }
+
+const auth = new Auth();
+
+export default auth;

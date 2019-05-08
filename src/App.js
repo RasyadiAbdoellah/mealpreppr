@@ -4,7 +4,7 @@ import { Landing } from './components';
 import { MainContainer } from './containers';
 import history from './history';
 
-import Auth from './Auth/Auth';
+import auth from './Auth/Auth';
 import Callback from './components/Callback';
 
 // Goal for auth is to have a custom landing page that stops ppl from using the app if they're not signed in.
@@ -15,8 +15,6 @@ import Callback from './components/Callback';
 // figure out how to make custom signin widget and prevent initial redirect
 // figure out how to tie in auth status to redux
 // figure out routing logic
-
-const auth = new Auth();
 
 const handleAuthentication = ({ location }) => {
   if (/access_token|id_token|error/.test(location.hash)) {
