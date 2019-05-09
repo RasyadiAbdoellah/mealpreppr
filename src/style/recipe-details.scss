@@ -1,66 +1,64 @@
-// Detail is a third of the full desktop page. 
-// Since the top level container is flex nowrap, main and detail will take 50% of the screen evenly. 
+// Detail is a third of the full desktop page.
+// Since the top level container is flex nowrap, main and detail will take 50% of the screen evenly.
 // Setting detail to 60% will equal to 30% of the screen since 30% of 100 is 60% of 50.
 #detail {
-  flex: 1 1 60%;
-  right:0;
+  right: 0;
   padding: 20px;
-  box-shadow: -1px 0 3px $dark-gray;
-  height:100vh;
+  border-left: 1px solid $light-gray;
+  height: 100vh;
 }
-.title-field{
+.title-field {
   margin: 5px 5px 0 0;
   padding: 5px 2px 0 2px;
   border: none;
   border-bottom: 2px solid $dark-gray;
-  font:inherit;
+  font: inherit;
   font-weight: bold;
   font-size: 2em;
-
 }
 
-.quant-field{
+.quant-field {
   max-width: 2rem;
 }
-.scale-field{
+.scale-field {
   max-width: 5rem;
 }
-.name-field{
+.name-field {
   min-width: 7rem;
-
 }
-.quant-field, .scale-field, .name-field {
+.quant-field,
+.scale-field,
+.name-field {
   margin: 5px 5px 0 0;
   padding: 5px 2px 1px 3px;
   border: none;
   border-bottom: 2px solid $light-gray;
-  font:inherit;
+  font: inherit;
   flex: 0 1 auto;
   &::placeholder {
     color: $gray;
   }
 }
 
-.detail-text-area{
-  width:80%;
+.detail-text-area {
+  width: 80%;
   height: 25vh;
-  font:inherit;
+  font: inherit;
   border: 1px solid $light-gray;
 }
 
-.ingredientFields{
-  display:flex;
+.ingredientFields {
+  display: flex;
   flex-flow: row nowrap;
 }
-.ingredients{
+.ingredients {
   list-style: none;
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
-.ingredient-entry{
+.ingredient-entry {
   margin: 5px 5px 0 0;
   padding: 5px 2px 1px 3px;
-  font:inherit;
+  font: inherit;
   flex: 0 1 auto;
 }
-

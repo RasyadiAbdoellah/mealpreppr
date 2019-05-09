@@ -1,7 +1,7 @@
+@import '~bulma/bulma.sass';
 // Global constants
 @import './constants/colours.scss';
 @import './constants/typography.scss';
-
 
 //main is top level styling. All global styles should go in main
 @import './main.scss';

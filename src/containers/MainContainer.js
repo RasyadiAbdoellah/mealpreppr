@@ -10,36 +10,32 @@ import { RecipeDetailsContainer } from '.';
 
 class MainContainer extends React.Component {
   render() {
-    const {
-      recipeList,
-      recipeIsGetting,
-      recipeGetFailed,
-      getAllRecipes,
-      auth,
-    } = this.props;
+    const { recipeList, recipeIsGetting, recipeGetFailed, getAllRecipes, auth } = this.props;
     return (
       <>
-        <div id="main">
-          <MainNav id="navbar" auth={auth} getAllRecipes={getAllRecipes} />
-          <Route
-            path="/recipes"
-            render={props => {
-              return auth.isAuthenticated() ? (
-                recipeIsGetting ? (
-                  <p>Loading...</p>
-                ) : recipeGetFailed ? (
-                  <p> Failed to load recipes. Try again later </p>
-                ) : (
-                  <RecipeList recipes={recipeList} {...props} />
-                )
-              ) : (
-                <p>Not logged in!</p>
-              );
-            }}
-          />
+        <div id="main" className="columns is-paddingless ">
+          <div className="column">
+            <div className="container is-fluid">
+              <MainNav id="navbar" auth={auth} getAllRecipes={getAllRecipes} />
+              <Route
+                path="/recipes"
+                render={props => {
+                  let fragment;
+                  if (auth.isAuthenticated()) {
+                    if (recipeIsGetting) fragment = <p>Loading...</p>;
+                    else if (recipeGetFailed)
+                      fragment = <p> Failed to load recipes. Try again later </p>;
+                    else fragment = <RecipeList recipes={recipeList} {...props} />;
+                  } else {
+                    fragment = <p>Not logged in!</p>;
+                  }
+                  return <div>{fragment}</div>;
+                }}
+              />
+            </div>
+          </div>
+          <Route path="/recipes/:id" component={RecipeDetailsContainer} />
         </div>
-
-        <Route path="/recipes/:id" component={RecipeDetailsContainer} />
       </>
     );
   }

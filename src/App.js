@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter, Router, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import { Landing } from './components';
 import { MainContainer } from './containers';
 import history from './history';
@@ -26,20 +26,18 @@ export default class App extends Component {
     return (
       <Router history={history}>
         <div className="App">
-          <div className="flex-container">
-            <Route
-              path="/"
-              render={props => <MainContainer auth={auth} {...props} />}
-            />
-            <Route
-              path="/callback"
-              exact
-              render={props => {
-                handleAuthentication(props);
-                return <Callback {...props} />;
-              }}
-            />
-          </div>
+          <Route
+            path="/"
+            render={props => <MainContainer auth={auth} {...props} />}
+          />
+          <Route
+            path="/callback"
+            exact
+            render={props => {
+              handleAuthentication(props);
+              return <Callback {...props} />;
+            }}
+          />
         </div>
       </Router>
     );
