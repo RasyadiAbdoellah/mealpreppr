@@ -15,7 +15,7 @@ class Details extends React.Component {
 
     // fragment rendered is changed depending on the local showInput state
     return (
-      <div id="detail" className="column is-one-third-desktop is-half-tablet">
+      <div id="detail" className="column is-two-fifths-desktop is-half-tablet">
         <Switch>
           <Route
             exact
