@@ -10,7 +10,7 @@ function RecipeCard(props) {
         className="box"
         style={{ width: "200px", height: "200px" }}
       >
-        <h1>{recipe.name}</h1>
+        <h1 className="title">{recipe.name}</h1>
       </Link>
     </div>
   );

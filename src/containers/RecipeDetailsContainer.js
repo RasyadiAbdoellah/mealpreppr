@@ -13,7 +13,6 @@ class Details extends React.Component {
   render() {
     const { recipe, match, deleteSelectedRecipe } = this.props;
 
-    // fragment rendered is changed depending on the local showInput state
     return (
       <div id="detail" className="column is-two-fifths-desktop is-half-tablet">
         <Switch>
@@ -33,7 +32,7 @@ class Details extends React.Component {
             exact
             path={`${match.url}`}
             render={() => {
-              //RecipeDetails needs the parent match prop since
+              //RecipeDetails needs the grandparent match prop since id is based of what's in match
               return (
                 <>
                   {/* Match.url below should be /recipes/:id so the Link to should = recipes/1/edit when done correctly */}
