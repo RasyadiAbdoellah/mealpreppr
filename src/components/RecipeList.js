@@ -5,7 +5,11 @@ function RecipeCard(props) {
   const { recipe, match } = props;
   return (
     <div className="column is-narrow">
-      <Link to={`${match.url}/${recipe.id}`} className="recipe-card">
+      <Link
+        to={`${match.url}/${recipe.id}`}
+        className="box"
+        style={{ width: "200px", height: "200px" }}
+      >
         <h1>{recipe.name}</h1>
       </Link>
     </div>
