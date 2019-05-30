@@ -1,18 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 function RecipeCard(props) {
   const { recipe, match } = props;
   return (
-    <Link to={`${match.url}/${recipe.id}`} className="recipe-card">
-      <h1>{recipe.name}</h1>
-    </Link>
+    <div className="column is-narrow">
+      <Link to={`${match.url}/${recipe.id}`} className="recipe-card">
+        <h1>{recipe.name}</h1>
+      </Link>
+    </div>
   );
 }
 
 export default function RecipeList(props) {
   return (
-    <div className="recipe-collection">
+    <div className="columns is-multiline">
       {props.recipes.map(recipe => (
         <RecipeCard key={recipe.id} recipe={recipe} {...props} />
       ))}

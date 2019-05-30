@@ -1,10 +1,10 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link, Route, Switch } from 'react-router-dom';
+import React from "react";
+import { connect } from "react-redux";
+import { Link, Route, Switch } from "react-router-dom";
 
-import { RecipeForm, RecipeDetails, DetailsNav } from '../components';
-import { getRecipeById } from '../redux/selectors';
-import { deleteSelectedRecipe } from '../redux/actions/recipe';
+import { RecipeForm, RecipeDetails, DetailsNav } from "../components";
+import { getRecipeById } from "../redux/selectors";
+import { deleteSelectedRecipe } from "../redux/actions/recipe";
 
 // RecipeList is visually going to be a card, or rectangular box, with the recipe name and details, and full info that expands or opens a RecipeEntry component in new view on click
 // expanded view will reveal an edit and delete button
@@ -67,9 +67,9 @@ function mapStateToProps(
   state,
   {
     match: {
-      params: { id },
-    },
-  },
+      params: { id }
+    }
+  }
 ) {
   const recipe = getRecipeById(state, id);
   return { recipe };
@@ -77,5 +77,5 @@ function mapStateToProps(
 
 export default connect(
   mapStateToProps,
-  { deleteSelectedRecipe },
+  { deleteSelectedRecipe }
 )(Details);

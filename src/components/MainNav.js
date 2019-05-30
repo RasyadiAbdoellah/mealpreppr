@@ -1,7 +1,7 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-class Landing extends React.Component {
+class AuthButton extends React.Component {
   login = () => {
     this.props.auth.login();
   };
@@ -13,7 +13,7 @@ class Landing extends React.Component {
   componentDidMount() {
     const { renewSession } = this.props.auth;
 
-    if (localStorage.getItem('isLoggedIn') === 'true') {
+    if (localStorage.getItem("isLoggedIn") === "true") {
       renewSession();
     }
   }
@@ -35,7 +35,7 @@ export default function(props) {
         My Recipes
       </NavLink>
       <NavLink to="/recipes/new">Add Recipe</NavLink>
-      <Landing auth={props.auth} />
+      <AuthButton auth={props.auth} />
     </nav>
   );
 }
