@@ -6,9 +6,14 @@ import { RecipeForm, RecipeDetails, DetailsNav } from "../components";
 import { getRecipeById } from "../redux/selectors";
 import { deleteSelectedRecipe } from "../redux/actions/recipe";
 
-// RecipeList is visually going to be a card, or rectangular box, with the recipe name and details, and full info that expands or opens a RecipeEntry component in new view on click
-// expanded view will reveal an edit and delete button
-// edit button toggles the JSX fragment shown
+//Details is a container that renders routes for /recipes/new or recipes/:id
+//It is called within a route in App.js and receives match from Route in MainContainer. 
+//This match prop is used to populate recipe via redux
+
+
+//TODO - STYLING
+//Add inner div with .box or .card
+//Add Typography to RecipeDetails
 class Details extends React.Component {
   render() {
     const { recipe, match, deleteSelectedRecipe } = this.props;
@@ -18,40 +23,37 @@ class Details extends React.Component {
         <Switch>
           <Route
             exact
-            path="/recipes/new"
-            render={() => {
-              return (
-                <>
-                  <DetailsNav match={match} isForm />
-                  <RecipeForm id="new" />
-                </>
-              );
-            }}
-          />
-          <Route
-            exact
             path={`${match.url}`}
             render={() => {
-              //RecipeDetails needs the grandparent match prop since id is based of what's in match
-              return (
-                <>
-                  {/* Match.url below should be /recipes/:id so the Link to should = recipes/1/edit when done correctly */}
-                  <DetailsNav
-                    match={match}
-                    deleteSelectedRecipe={deleteSelectedRecipe}
-                  />
-                  <RecipeDetails id={match.params.id} recipe={recipe} />
-                </>
-              );
+              //if id is new show new form, else show recipe detail
+              if(match.params.id === 'new') {
+                return (
+                  <>
+                    <DetailsNav match={match} isForm />
+                    <RecipeForm id="new" />
+                  </>
+                );
+              } else {
+                return (
+                  <>
+                    <DetailsNav
+                      match={match}
+                      deleteSelectedRecipe={deleteSelectedRecipe}
+                    />
+                    <RecipeDetails id={recipe.id} recipe={recipe} />
+                  </>
+                );
+              }
             }}
           />
           <Route
+            //Match.url below should be /recipes/:id so the Link to should = recipes/1/edit when done correctly
             path={`${match.url}/edit`}
             render={() => {
               return (
                 <>
                   <DetailsNav match={match} isForm />
-                  <RecipeForm id={match.params.id} />
+                  <RecipeForm id={recipe.id} />
                 </>
               );
             }}
