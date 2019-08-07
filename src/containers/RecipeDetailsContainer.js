@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch, Redirect } from "react-router-dom";
 
 import { RecipeForm, RecipeDetails, DetailsNav } from "../components";
 import { getRecipeById } from "../redux/selectors";
@@ -33,7 +33,8 @@ class Details extends React.Component {
                     <RecipeForm id="new" />
                   </>
                 );
-              } else {
+              } else if(recipe){
+                //checks if recipe prop is defined
                 return (
                   <>
                     <DetailsNav
@@ -43,6 +44,9 @@ class Details extends React.Component {
                     <RecipeDetails id={recipe.id} recipe={recipe} />
                   </>
                 );
+              } else {
+                // fail condition redirects back to recipes
+                return <Redirect to='/recipes' />
               }
             }}
           />
