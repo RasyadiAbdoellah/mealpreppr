@@ -24,7 +24,7 @@ export default function (state = initialState, action) {
         }
         case RECEIVE_RECIPES: {
             const { data } = action.payload
-            if( data && typeof data !== 'string') {
+            if( data && Array.isArray(data)) {
                 const dataIds = data.map(recipe => recipe.id)
                 const recipesById = {}
     

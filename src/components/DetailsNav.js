@@ -24,7 +24,7 @@ export default class DetailsNav extends React.Component {
           <button onClick={() => this.warningHandler()}>Delete</button>
           { showWarning && <>
               <h4>Are you sure?</h4>
-              <button onClick={() => deleteSelectedRecipe(id) }> yes </button>
+              <Link to='/recipes' onClick={() => deleteSelectedRecipe(id) }> yes </Link>
               <button onClick={() => this.warningHandler()}> no </button>
           </>}        
         </> : <Link to={ id !== 'new' ? `${url}` : '/recipes'}> Cancel </Link> }
