@@ -9,7 +9,7 @@
     "gh-pages": "^2.0.1",
     "history": "^4.9.0",
     "lodash": "^4.17.11",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-html-parser": "^2.0.2",
